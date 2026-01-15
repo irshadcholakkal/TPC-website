@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-black: #000000;
+  --color-brand-dark-gray: #050505;
+  --color-brand-blue: #C0C0C0;
+  --color-brand-blue-glow: rgba(192, 192, 192, 0.1);
+  --color-brand-cyan: #D3D3D3;
+
+  --font-heading: var(--font-outfit);
+  --font-body: var(--font-inter);
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px var(--color-brand-blue-glow);
+    }
+
+    to {
+      box-shadow: 0 0 20px var(--color-brand-blue), 0 0 10px var(--color-brand-cyan);
+    }
+  }
+
+
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.scroller .animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+
+:root {
+  /* CryptGen Design Palette */
+  --bg-primary: #000000;
+  --bg-secondary: #050505;
+  --accent-primary: #0066FF;
+  /* Bright Blue */
+  --accent-secondary: #00F0FF;
+  /* Cyan */
+  --accent-glow: rgba(0, 102, 255, 0.5);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  /* Silver/Platinum */
+  --text-muted: #9CA3AF;
+
+  --glass-bg: rgba(0, 0, 0, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 12px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Subtle white border */
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 102, 255, 0.1));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 102, 255, 0.4);
+  /* Blue border on hover */
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #FFFFFF 0%, #B0B0B0 100%);
+  /* Silver gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Background Patterns */
+.bg-dot-thick-neutral-800 {
+  background-image: radial-gradient(circle, #262626 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-thick-indigo-500 {
+  background-image: radial-gradient(circle, #0066FF 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-thick-cyan-500 {
+  background-image: radial-gradient(circle, #00F0FF 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+@keyframes cell-ripple {
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+}
+
+.animate-cell-ripple {
+  animation: cell-ripple var(--duration) linear var(--delay) forwards;
+}
