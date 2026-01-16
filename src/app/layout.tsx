@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
-      <body className="antialiased font-body bg-black text-white selection:bg-brand-blue selection:text-white">
+      <body className="antialiased font-body bg-black text-white selection:bg-white selection:text-black">
         <Navigation />
         <main className="min-h-screen relative overflow-hidden bg-black">
           {children}

@@ -84,26 +84,29 @@ export default function Hero() {
 
 
 
-                        <Link href="/contact">
+                        <Link href="#contact" className="group">
                             <button
                                 className="
-      relative inline-flex 
-      h-12 w-90 
+      relative inline-flex
+      h-12 w-full sm:w-64
       overflow-hidden rounded-full p-[1px]
       focus:outline-none
-      focus:ring-0
+      focus:ring-2 focus:ring-white/20
     "
                             >
-                                {/* glowing ring (not hover-based anymore) */}
-                                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                                {/* glowing ring */}
+                                <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-40" />
 
                                 {/* real button body */}
                                 <span
                                     className="
-        inline-flex h-full w-full items-center justify-center 
-        rounded-full bg-slate-950 
-        px-6 py-1 text-sm font-medium text-white 
-        backdrop-blur-3xl
+        inline-flex h-full w-full items-center justify-center
+        rounded-full bg-black
+        px-8 py-1 text-sm font-bold text-white
+        backdrop-blur-3xl border border-white/15
+        transition-all duration-300
+        group-hover:bg-black
+        relative z-10
       "
                                 >
                                     Get Started

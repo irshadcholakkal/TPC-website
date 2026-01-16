@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
-import GlassCard from '@/components/ui/GlassCard';
+import { CardSpotlight } from '@/components/ui/card-spotlight';
 import SectionHeading from '@/components/ui/SectionHeading';
+import { FloatingProfitBackground } from '@/components/ui/FloatingProfitBackground';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
-import type { Metadata } from 'next';
 
 const services = [
     {
@@ -80,42 +80,52 @@ const services = [
 
 export default function ServicesPage() {
     return (
-        <div className="pt-32 pb-24">
-            <Container>
+        <main className="relative min-h-screen pt-32 pb-24 bg-black overflow-hidden">
+            <FloatingProfitBackground />
+
+            <Container className="relative z-10">
                 <SectionHeading
                     title="Our Services"
                     subtitle="Comprehensive e-commerce management tailored for premium brands"
-                    className="mb-20"
+                    className="mb-24"
+                    titleClassName="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
                 />
 
                 <motion.div
-                    className="space-y-16"
+                    className="space-y-24"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
                 >
                     {services.map((service, index) => (
-                        <motion.div key={index} variants={fadeInUp}>
-                            <h3 className="text-3xl font-bold mb-8 text-[#f5f5f7]">
+                        <motion.div key={index} variants={fadeInUp} className="relative">
+                            <h3 className="text-4xl font-bold mb-10 text-white flex items-center gap-4">
+                                <span className="h-px w-12 bg-white/20" />
                                 {service.category}
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {service.items.map((item, itemIndex) => (
-                                    <GlassCard key={itemIndex} hover padding="lg">
-                                        <h4 className="text-xl font-semibold mb-3 text-[#f5f5f7]">
-                                            {item.title}
-                                        </h4>
-                                        <p className="text-[#a1a1aa] leading-relaxed">
-                                            {item.description}
-                                        </p>
-                                    </GlassCard>
+                                    <CardSpotlight
+                                        key={itemIndex}
+                                        className="min-h-[220px] flex flex-col group border-white/5"
+                                    >
+                                        <div className="relative z-20">
+                                            <h4 className="text-2xl font-bold mb-4 text-white group-hover:text-neutral-300 transition-colors duration-300">
+                                                {item.title}
+                                            </h4>
+                                            <p className="text-neutral-400 leading-relaxed font-medium">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                    </CardSpotlight>
                                 ))}
                             </div>
                         </motion.div>
                     ))}
                 </motion.div>
             </Container>
-        </div>
+        </main>
     );
 }

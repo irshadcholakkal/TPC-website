@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Container from '@/components/ui/Container';
-import GlassCard from '@/components/ui/GlassCard';
+import { CardSpotlight } from '@/components/ui/card-spotlight';
 import SectionHeading from '@/components/ui/SectionHeading';
-import Button from '@/components/ui/Button';
+import { FloatingProfitBackground } from '@/components/ui/FloatingProfitBackground';
 import { fadeInUp } from '@/lib/animations';
 
 export default function ContactPage() {
@@ -17,11 +17,12 @@ export default function ContactPage() {
     });
 
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: '' }));
         }
@@ -29,136 +30,182 @@ export default function ContactPage() {
 
     const validateForm = () => {
         const newErrors: Record<string, string> = {};
-
-        if (!formData.name.trim()) {
-            newErrors.name = 'Name is required';
-        }
-
+        if (!formData.name.trim()) newErrors.name = 'Name is required';
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
             newErrors.email = 'Invalid email format';
         }
-
-        if (!formData.company.trim()) {
-            newErrors.company = 'Company is required';
-        }
-
-        if (!formData.message.trim()) {
-            newErrors.message = 'Message is required';
-        }
-
+        if (!formData.company.trim()) newErrors.company = 'Company is required';
+        if (!formData.message.trim()) newErrors.message = 'Message is required';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         if (validateForm()) {
-            // Form is valid - in production, this would submit to an API
-            console.log('Form submitted:', formData);
-            alert('Thank you for your message. We will respond within 24 hours.');
-            setFormData({ name: '', email: '', company: '', message: '' });
+            setIsSubmitting(true);
+            setSubmitStatus('idle');
+
+            try {
+                const response = await fetch('https://formspree.io/f/mzddzozp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    setIsSubmitting(false);
+                    setSubmitStatus('success');
+                    setFormData({ name: '', email: '', company: '', message: '' });
+                } else {
+                    setIsSubmitting(false);
+                    setSubmitStatus('error');
+                }
+            } catch (error) {
+                setIsSubmitting(false);
+                setSubmitStatus('error');
+            }
         }
     };
 
     return (
-        <div className="pt-32 pb-24">
-            <Container size="md">
+        <main className="relative min-h-screen pt-32 pb-24 bg-black overflow-hidden">
+            <FloatingProfitBackground />
+
+            <Container className="relative z-10">
                 <SectionHeading
-                    title="Let's Talk"
-                    subtitle="We respond within 24 hours"
-                    className="mb-16"
+                    title="Let's Talk Business"
+                    subtitle="We respond to all serious inquiries within 24 hours"
+                    className="mb-24"
+                    titleClassName="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
                 />
 
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeInUp}
-                >
-                    <GlassCard hover={false} padding="lg">
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-[#f5f5f7] mb-2">
-                                    Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#f5f5f7] placeholder-[#71717a] focus:outline-none focus:border-[#E5E7EB] transition-colors duration-300"
-                                    placeholder="Your name"
-                                />
-                                {errors.name && (
-                                    <p className="mt-1 text-sm text-red-400">{errors.name}</p>
-                                )}
-                            </div>
+                <div className="max-w-2xl mx-auto">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                    >
+                        <CardSpotlight
+                            className="p-10 border-white/5 bg-white/[0.01]"
+                            showSpotlight={false}
+                        >
+                            <form onSubmit={handleSubmit} className="space-y-8 relative z-20">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div className="space-y-2">
+                                        <label htmlFor="name" className="text-sm font-semibold text-neutral-400 ml-1 uppercase tracking-wider">
+                                            Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:bg-white/[0.05] transition-all duration-300"
+                                            placeholder="Your name"
+                                        />
+                                        {errors.name && <p className="text-xs text-red-500 font-medium ml-1">{errors.name}</p>}
+                                    </div>
 
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-[#f5f5f7] mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#f5f5f7] placeholder-[#71717a] focus:outline-none focus:border-[#E5E7EB] transition-colors duration-300"
-                                    placeholder="your@email.com"
-                                />
-                                {errors.email && (
-                                    <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-                                )}
-                            </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="text-sm font-semibold text-neutral-400 ml-1 uppercase tracking-wider">
+                                            Email Address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:bg-white/[0.05] transition-all duration-300"
+                                            placeholder="operations@yourbrand.com"
+                                        />
+                                        {errors.email && <p className="text-xs text-red-500 font-medium ml-1">{errors.email}</p>}
+                                    </div>
+                                </div>
 
-                            <div>
-                                <label htmlFor="company" className="block text-sm font-medium text-[#f5f5f7] mb-2">
-                                    Company
-                                </label>
-                                <input
-                                    type="text"
-                                    id="company"
-                                    name="company"
-                                    value={formData.company}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#f5f5f7] placeholder-[#71717a] focus:outline-none focus:border-[#E5E7EB] transition-colors duration-300"
-                                    placeholder="Your company"
-                                />
-                                {errors.company && (
-                                    <p className="mt-1 text-sm text-red-400">{errors.company}</p>
-                                )}
-                            </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="company" className="text-sm font-semibold text-neutral-400 ml-1 uppercase tracking-wider">
+                                        Company Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        value={formData.company}
+                                        onChange={handleChange}
+                                        className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:bg-white/[0.05] transition-all duration-300"
+                                        placeholder="Enter your brand or company name"
+                                    />
+                                    {errors.company && <p className="text-xs text-red-500 font-medium ml-1">{errors.company}</p>}
+                                </div>
 
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-[#f5f5f7] mb-2">
-                                    Message
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    rows={6}
-                                    className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#f5f5f7] placeholder-[#71717a] focus:outline-none focus:border-[#E5E7EB] transition-colors duration-300 resize-none"
-                                    placeholder="Tell us about your e-commerce operations..."
-                                />
-                                {errors.message && (
-                                    <p className="mt-1 text-sm text-red-400">{errors.message}</p>
-                                )}
-                            </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="message" className="text-sm font-semibold text-neutral-400 ml-1 uppercase tracking-wider">
+                                        Operational Requirements
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        rows={6}
+                                        className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:bg-white/[0.05] transition-all duration-300 resize-none"
+                                        placeholder="Describe your current e-commerce setup and how we can assist..."
+                                    />
+                                    {errors.message && <p className="text-xs text-red-500 font-medium ml-1">{errors.message}</p>}
+                                </div>
 
-                            <Button type="submit" variant="primary" className="w-full">
-                                Send Message
-                            </Button>
-                        </form>
-                    </GlassCard>
-                </motion.div>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="relative inline-flex h-14 w-full overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-white/20 disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-30" />
+                                    <span className="inline-flex h-full w-full items-center justify-center rounded-xl bg-black px-8 py-3 text-lg font-bold text-white backdrop-blur-3xl transition-colors hover:bg-white/10 border border-white/10">
+                                        {isSubmitting ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Sending...
+                                            </>
+                                        ) : (
+                                            'Submit Inquiry'
+                                        )}
+                                    </span>
+                                </button>
+
+                                {submitStatus === 'success' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-white text-center text-sm font-medium"
+                                    >
+                                        Thank you! We'll respond to <span className="font-bold">thepercentagecompany1@gmail.com</span> within 24 hours.
+                                    </motion.div>
+                                )}
+                                {submitStatus === 'error' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-center text-sm font-medium"
+                                    >
+                                        Something went wrong. Please try again or email us directly.
+                                    </motion.div>
+                                )}
+                            </form>
+                        </CardSpotlight>
+                    </motion.div>
+                </div>
             </Container>
-        </div>
+        </main>
     );
 }

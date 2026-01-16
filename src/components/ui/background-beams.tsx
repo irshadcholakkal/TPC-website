@@ -1,74 +1,3 @@
-// "use client";
-// import { cn } from "@/lib/utils";
-// import { motion } from "framer-motion";
-// import React from "react";
-
-// export const BackgroundBeams = ({ className }: { className?: string }) => {
-//     return (
-//         <div
-//             className={cn(
-//                 "absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-neutral-900 to-transparent flex items-center justify-center overflow-hidden",
-//                 className
-//             )}
-//         >
-//             <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-black to-transparent z-10" />
-
-//             {/* Beams */}
-//             <div className="absolute inset-0 flex items-center justify-center opacity-30">
-//                 <motion.div
-//                     animate={{
-//                         rotate: [0, 360],
-//                         opacity: [0.1, 0.3, 0.1]
-//                     }}
-//                     transition={{
-//                         duration: 20,
-//                         repeat: Infinity,
-//                         ease: "linear"
-//                     }}
-//                     className="w-[800px] h-[800px] bg-gradient-to-r from-brand-blue/20 to-brand-cyan/20 blur-[100px] rounded-full absolute -top-[400px]"
-//                 />
-//                 <motion.div
-//                     animate={{
-//                         rotate: [360, 0],
-//                         scale: [1, 1.2, 1]
-//                     }}
-//                     transition={{
-//                         duration: 15,
-//                         repeat: Infinity,
-//                         ease: "linear"
-//                     }}
-//                     className="w-[600px] h-[600px] bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-[80px] rounded-full absolute -top-[300px]"
-//                 />
-//             </div>
-
-//             <div className="absolute inset-0 z-0">
-//                 <svg
-//                     className="h-full w-full opacity-20"
-//                     viewBox="0 0 100 100"
-//                     preserveAspectRatio="none"
-//                 >
-//                     <motion.path
-//                         d="M0 100 L50 0 L100 100"
-//                         stroke="url(#grad1)"
-//                         strokeWidth="0.5"
-//                         fill="none"
-//                         initial={{ pathLength: 0, opacity: 0 }}
-//                         animate={{ pathLength: 1, opacity: 1 }}
-//                         transition={{ duration: 2, ease: "easeInOut" }}
-//                     />
-//                     <defs>
-//                         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-//                             <stop offset="0%" style={{ stopColor: "var(--brand-blue)", stopOpacity: 0 }} />
-//                             <stop offset="50%" style={{ stopColor: "var(--brand-cyan)", stopOpacity: 1 }} />
-//                             <stop offset="100%" style={{ stopColor: "var(--brand-blue)", stopOpacity: 0 }} />
-//                         </linearGradient>
-//                     </defs>
-//                 </svg>
-//             </div>
-//         </div>
-//     );
-// };
-
 
 
 "use client";
@@ -185,10 +114,10 @@ export const BackgroundBeams = React.memo(
                                     delay: Math.random() * 10,
                                 }}
                             >
-                                <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-                                <stop stopColor="#18CCFC"></stop>
-                                <stop offset="32.5%" stopColor="#6344F5"></stop>
-                                <stop offset="100%" stopColor="#AE48FF" stopOpacity="0"></stop>
+                                <stop stopColor="#FFFFFF" stopOpacity="0"></stop>
+                                <stop stopColor="#FFFFFF"></stop>
+                                <stop offset="32.5%" stopColor="#A3A3A3"></stop>
+                                <stop offset="100%" stopColor="#737373" stopOpacity="0"></stop>
                             </motion.linearGradient>
                         ))}
 

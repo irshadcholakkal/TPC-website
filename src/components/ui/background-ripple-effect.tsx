@@ -3,7 +3,7 @@ import React, { useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
-    rows = 8,
+    rows = 16,
     cols = 27,
     cellSize = 56,
 }: {
@@ -72,7 +72,7 @@ const DivGrid = ({
     cols = 30,
     cellSize = 56,
     borderColor = "#3f3f46",
-    fillColor = "rgba(14,165,233,0.3)",
+    fillColor = "rgba(255, 255, 255, 0.02)",
     clickedCell = null,
     onCellClick = () => { },
     interactive = true,
