@@ -9,6 +9,14 @@ import { FlipWords } from "../ui/flip-words";
 export default function Hero() {
     const words = ["Operations", "Solutions", "Platform"];
 
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const element = document.getElementById('contact');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="relative h-screen flex flex-col justify-center overflow-hidden bg-black">
             <BackgroundRippleEffect />
@@ -35,21 +43,21 @@ export default function Hero() {
                     </h2>
 
                     <motion.p
-                        className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-neutral-400 mb-8 px-2"
+                        className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-neutral-400 mb-8 px-2 font-medium"
                     >
                         We synchronize your inventory, logistics, and analytics across all channels.
-                        From Amazon to local marketplaces, we handle the complexity so you can simply grow.
+                        From Amazon to local marketplaces. we handle the complexity so you can simply grow.
                     </motion.p>
 
                     <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-                        <Link href="#contact" className="group">
-                            <button className="relative inline-flex h-12 w-full sm:w-64 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-white/20 active:scale-95 transition-transform">
-                                <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-40" />
+                        <a href="#contact" onClick={handleScroll} className="group relative">
+                            <button className="relative inline-flex h-12 w-full sm:w-64 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-white/20 active:scale-95 transition-transform will-change-transform">
+                                <span className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-40 will-change-transform" />
                                 <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-bold text-white backdrop-blur-3xl border border-white/15 transition-all duration-300 group-hover:bg-slate-950 relative z-10">
                                     Get Started
                                 </span>
                             </button>
-                        </Link>
+                        </a>
                     </div>
                 </motion.div>
             </Container>

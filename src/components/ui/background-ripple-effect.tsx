@@ -1,29 +1,31 @@
 "use client";
-import React, { useMemo, useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useMemo, useRef, useState, useEffect, memo } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
-    cellSize = 56,
+    cellSize = 55,
 }: {
     cellSize?: number;
 }) => {
-    const [dimensions, setDimensions] = useState({ rows: 10, cols: 15 });
+    const [dimensions, setDimensions] = useState({ rows: 0, cols: 0 });
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const updateDimensions = () => {
-            const isMobile = window.innerWidth < 768;
-            setDimensions({
-                rows: isMobile ? 8 : 16,
-                cols: isMobile ? 12 : 27
-            });
+            if (typeof window === "undefined") return;
+            // Calculate exact fit + overscan for edges
+            const cols = Math.ceil(window.innerWidth / cellSize) + 4;
+            const rows = Math.ceil(window.innerHeight / cellSize) + 4;
+            setDimensions({ rows, cols });
         };
 
         updateDimensions();
         window.addEventListener('resize', updateDimensions);
         return () => window.removeEventListener('resize', updateDimensions);
-    }, []);
+    }, [cellSize]);
+
+    if (dimensions.rows === 0) return <div className="absolute inset-0 bg-black" />;
 
     return (
         <div
@@ -33,14 +35,14 @@ export const BackgroundRippleEffect = ({
                 "[--cell-border-color:rgba(255,255,255,0.06)]",
             )}
         >
-            <div className="relative h-full w-full overflow-hidden flex items-center justify-center">
-                <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
+            <div className="absolute inset-0 z-[1] w-full h-full overflow-hidden flex items-center justify-center">
                 <ReactorGrid
                     rows={dimensions.rows}
                     cols={dimensions.cols}
                     cellSize={cellSize}
                     borderColor="var(--cell-border-color)"
                 />
+                <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
             </div>
         </div>
     );
@@ -56,15 +58,15 @@ type ReactorGridProps = {
 const ReactorGrid = ({
     rows,
     cols,
-    cellSize = 56,
-    borderColor = "rgba(255,255,255,0.05)",
+    cellSize,
+    borderColor,
 }: ReactorGridProps) => {
     const [activeCells, setActiveCells] = useState<Set<number>>(new Set());
 
     useEffect(() => {
+        let timeoutId: NodeJS.Timeout;
         const runPulse = () => {
-            // Select a random number of cells across the grid (4-12 cells)
-            const count = Math.floor(Math.random() * 8) + 4;
+            const count = Math.floor(Math.random() * 12) + 6;
             const newCells = new Set<number>();
             const totalCells = rows * cols;
 
@@ -74,59 +76,65 @@ const ReactorGrid = ({
 
             setActiveCells(newCells);
 
-            // Pulse "On" time
-            const dwellTime = Math.random() * 1000 + 800; // 0.8 - 1.8s
-            setTimeout(() => {
+            const dwellTime = Math.random() * 1000 + 800;
+            timeoutId = setTimeout(() => {
                 setActiveCells(new Set());
+                timeoutId = setTimeout(runPulse, Math.random() * 1000 + 500);
             }, dwellTime);
-
-            // Interval between pulses (0.5 - 2s)
-            setTimeout(runPulse, Math.random() * 1500 + 500);
         };
 
-        const timer = setTimeout(runPulse, 1000);
-        return () => clearTimeout(timer);
+        runPulse();
+        return () => clearTimeout(timeoutId);
     }, [rows, cols]);
-
-    const cells = useMemo(
-        () => Array.from({ length: rows * cols }, (_, idx) => idx),
-        [rows, cols],
-    );
 
     const gridStyle: React.CSSProperties = {
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-        width: "fit-content",
-        height: "fit-content",
+        width: `${cols * cellSize}px`,
+        height: `${rows * cellSize}px`,
     };
 
     return (
         <div className="relative z-[3]" style={gridStyle}>
-            {cells.map((idx) => {
-                const isHighlighted = activeCells.has(idx);
-
-                return (
-                    <motion.div
-                        key={idx}
-                        className={cn(
-                            "cell relative border-[0.5px] transition-colors",
-                            "hover:bg-white/[0.05] hover:border-white/20 hover:duration-100",
-                        )}
-                        initial={false}
-                        animate={{
-                            backgroundColor: isHighlighted ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0)",
-                            borderColor: isHighlighted ? "rgba(255,255,255,0.2)" : borderColor,
-                            boxShadow: isHighlighted ? "inset 0 0 20px rgba(255,255,255,0.02)" : "none",
-                        }}
-                        transition={{
-                            duration: isHighlighted ? 0.3 : 1.5,
-                            ease: "easeInOut"
-                        }}
-                    />
-                );
-            })}
+            {Array.from({ length: rows * cols }).map((_, idx) => (
+                <GridCell
+                    key={idx}
+                    isHighlighted={activeCells.has(idx)}
+                    borderColor={borderColor}
+                />
+            ))}
         </div>
     );
 };
+
+const GridCell = memo(({
+    isHighlighted,
+    borderColor
+}: {
+    isHighlighted: boolean;
+    borderColor: string;
+}) => {
+    return (
+        <motion.div
+            className={cn(
+                "cell relative border-[0.5px] transition-colors",
+                "hover:bg-white/[0.05] hover:border-white/20 hover:duration-100",
+            )}
+            initial={false}
+            animate={{
+                backgroundColor: isHighlighted ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0)",
+                borderColor: isHighlighted ? "rgba(255,255,255,0.2)" : borderColor,
+                boxShadow: isHighlighted ? "inset 0 0 20px rgba(255,255,255,0.02)" : "none",
+            }}
+            transition={{
+                duration: isHighlighted ? 0.3 : 1.5,
+                ease: "easeInOut"
+            }}
+        />
+    );
+});
+
+GridCell.displayName = "GridCell";
+
 
