@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export const BackgroundBeams = React.memo(
+export const BackgroundBeams2 = React.memo(
     ({ className }: { className?: string }) => {
         const [isMobile, setIsMobile] = useState(false);
 
@@ -127,10 +127,10 @@ export const BackgroundBeams = React.memo(
                                     delay: Math.random() * 10,
                                 }}
                             >
-                                <stop stopColor="#FFFFFF" stopOpacity="0"></stop>
-                                <stop stopColor="#FFFFFF"></stop>
-                                <stop offset="32.5%" stopColor="#A3A3A3"></stop>
-                                <stop offset="100%" stopColor="#737373" stopOpacity="0"></stop>
+                                <stop stopColor="#D1B06B" stopOpacity="0"></stop>
+                                <stop stopColor="#FDE68A"></stop>
+                                <stop offset="32.5%" stopColor="#D1B06B"></stop>
+                                <stop offset="100%" stopColor="#B45309" stopOpacity="0"></stop>
                             </motion.linearGradient>
                         ))}
 
@@ -142,8 +142,8 @@ export const BackgroundBeams = React.memo(
                             gradientUnits="userSpaceOnUse"
                             gradientTransform="translate(352 34) rotate(90) scale(555 1560.62)"
                         >
-                            <stop offset="0.0666667" stopColor="#d4d4d4"></stop>
-                            <stop offset="0.243243" stopColor="#d4d4d4"></stop>
+                            <stop offset="0.0666667" stopColor="#D1B06B" stopOpacity="0.1"></stop>
+                            <stop offset="0.243243" stopColor="#D1B06B" stopOpacity="0.05"></stop>
                             <stop offset="0.43594" stopColor="white" stopOpacity="0"></stop>
                         </radialGradient>
                     </defs>
@@ -153,4 +153,4 @@ export const BackgroundBeams = React.memo(
     },
 );
 
-BackgroundBeams.displayName = "BackgroundBeams";
+BackgroundBeams2.displayName = "BackgroundBeams2";

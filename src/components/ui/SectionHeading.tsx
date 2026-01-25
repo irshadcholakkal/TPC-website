@@ -28,7 +28,7 @@ export default function SectionHeading({
             viewport={{ once: true, margin: '-100px' }}
             variants={fadeInUp}
         >
-            <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 tracking-tight ${titleClassName || 'text-white'}`}>
+            <h2 className={`text-3xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 tracking-tight ${titleClassName || 'text-white'}`}>
                 {title}
             </h2>
             {subtitle && (

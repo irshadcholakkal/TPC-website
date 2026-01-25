@@ -1,82 +1,93 @@
 "use client";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
-    rows = 16,
-    cols = 27,
     cellSize = 56,
 }: {
-    rows?: number;
-    cols?: number;
     cellSize?: number;
 }) => {
-    const [clickedCell, setClickedCell] = useState<{
-        row: number;
-        col: number;
-    } | null>(null);
-    const [rippleKey, setRippleKey] = useState(0);
-    const ref = useRef<any>(null);
+    const [dimensions, setDimensions] = useState({ rows: 10, cols: 15 });
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const updateDimensions = () => {
+            const isMobile = window.innerWidth < 768;
+            setDimensions({
+                rows: isMobile ? 8 : 16,
+                cols: isMobile ? 12 : 27
+            });
+        };
+
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions);
+        return () => window.removeEventListener('resize', updateDimensions);
+    }, []);
 
     return (
         <div
             ref={ref}
             className={cn(
-                "absolute inset-0 h-full w-full",
-                "[--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)]",
-                "dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]",
+                "absolute inset-0 h-full w-full bg-black overflow-hidden",
+                "[--cell-border-color:rgba(255,255,255,0.06)]",
             )}
         >
-            <div className="relative h-auto w-auto overflow-hidden">
+            <div className="relative h-full w-full overflow-hidden flex items-center justify-center">
                 <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
-                <DivGrid
-                    key={`base-${rippleKey}`}
-                    className="mask-radial-from-20% mask-radial-at-top opacity-600"
-                    rows={rows}
-                    cols={cols}
+                <ReactorGrid
+                    rows={dimensions.rows}
+                    cols={dimensions.cols}
                     cellSize={cellSize}
                     borderColor="var(--cell-border-color)"
-                    fillColor="var(--cell-fill-color)"
-                    clickedCell={clickedCell}
-                    onCellClick={(row, col) => {
-                        setClickedCell({ row, col });
-                        setRippleKey((k) => k + 1);
-                    }}
-                    interactive
                 />
             </div>
         </div>
     );
 };
 
-type DivGridProps = {
-    className?: string;
+type ReactorGridProps = {
     rows: number;
     cols: number;
-    cellSize: number; // in pixels
+    cellSize: number;
     borderColor: string;
-    fillColor: string;
-    clickedCell: { row: number; col: number } | null;
-    onCellClick?: (row: number, col: number) => void;
-    interactive?: boolean;
 };
 
-type CellStyle = React.CSSProperties & {
-    ["--delay"]?: string;
-    ["--duration"]?: string;
-};
-
-const DivGrid = ({
-    className,
-    rows = 7,
-    cols = 30,
+const ReactorGrid = ({
+    rows,
+    cols,
     cellSize = 56,
-    borderColor = "#3f3f46",
-    fillColor = "rgba(255, 255, 255, 0.02)",
-    clickedCell = null,
-    onCellClick = () => { },
-    interactive = true,
-}: DivGridProps) => {
+    borderColor = "rgba(255,255,255,0.05)",
+}: ReactorGridProps) => {
+    const [activeCells, setActiveCells] = useState<Set<number>>(new Set());
+
+    useEffect(() => {
+        const runPulse = () => {
+            // Select a random number of cells across the grid (4-12 cells)
+            const count = Math.floor(Math.random() * 8) + 4;
+            const newCells = new Set<number>();
+            const totalCells = rows * cols;
+
+            for (let i = 0; i < count; i++) {
+                newCells.add(Math.floor(Math.random() * totalCells));
+            }
+
+            setActiveCells(newCells);
+
+            // Pulse "On" time
+            const dwellTime = Math.random() * 1000 + 800; // 0.8 - 1.8s
+            setTimeout(() => {
+                setActiveCells(new Set());
+            }, dwellTime);
+
+            // Interval between pulses (0.5 - 2s)
+            setTimeout(runPulse, Math.random() * 1500 + 500);
+        };
+
+        const timer = setTimeout(runPulse, 1000);
+        return () => clearTimeout(timer);
+    }, [rows, cols]);
+
     const cells = useMemo(
         () => Array.from({ length: rows * cols }, (_, idx) => idx),
         [rows, cols],
@@ -86,48 +97,36 @@ const DivGrid = ({
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-        width: cols * cellSize,
-        height: rows * cellSize,
-        marginInline: "auto",
+        width: "fit-content",
+        height: "fit-content",
     };
 
     return (
-        <div className={cn("relative z-[3]", className)} style={gridStyle}>
+        <div className="relative z-[3]" style={gridStyle}>
             {cells.map((idx) => {
-                const rowIdx = Math.floor(idx / cols);
-                const colIdx = idx % cols;
-                const distance = clickedCell
-                    ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
-                    : 0;
-                const delay = clickedCell ? Math.max(0, distance * 55) : 0; // ms
-                const duration = 200 + distance * 80; // ms
-
-                const style: CellStyle = clickedCell
-                    ? {
-                        "--delay": `${delay}ms`,
-                        "--duration": `${duration}ms`,
-                    }
-                    : {};
+                const isHighlighted = activeCells.has(idx);
 
                 return (
-                    <div
+                    <motion.div
                         key={idx}
                         className={cn(
-                            "cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
-                            clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
-                            !interactive && "pointer-events-none",
+                            "cell relative border-[0.5px] transition-colors",
+                            "hover:bg-white/[0.05] hover:border-white/20 hover:duration-100",
                         )}
-                        style={{
-                            backgroundColor: fillColor,
-                            borderColor: borderColor,
-                            ...style,
+                        initial={false}
+                        animate={{
+                            backgroundColor: isHighlighted ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0)",
+                            borderColor: isHighlighted ? "rgba(255,255,255,0.2)" : borderColor,
+                            boxShadow: isHighlighted ? "inset 0 0 20px rgba(255,255,255,0.02)" : "none",
                         }}
-                        onClick={
-                            interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined
-                        }
+                        transition={{
+                            duration: isHighlighted ? 0.3 : 1.5,
+                            ease: "easeInOut"
+                        }}
                     />
                 );
             })}
         </div>
     );
 };
+

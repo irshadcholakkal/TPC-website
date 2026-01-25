@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import { CardSpotlight } from '@/components/ui/card-spotlight';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { FloatingProfitBackground } from '@/components/ui/FloatingProfitBackground';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 const services = [
@@ -81,18 +80,17 @@ const services = [
 export default function ServicesPage() {
     return (
         <main className="relative min-h-screen pt-32 pb-24 bg-black overflow-hidden">
-            <FloatingProfitBackground />
-
-            <Container className="relative z-10">
+          
+            <Container className="relative z-10 px-4">
                 <SectionHeading
                     title="Our Services"
                     subtitle="Comprehensive e-commerce management tailored for premium brands"
-                    className="mb-24"
-                    titleClassName="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
+                    className="mb-16 md:mb-24"
+                    titleClassName="text-4xl sm:text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
                 />
 
                 <motion.div
-                    className="space-y-24"
+                    className="space-y-16 md:space-y-24"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
@@ -100,22 +98,22 @@ export default function ServicesPage() {
                 >
                     {services.map((service, index) => (
                         <motion.div key={index} variants={fadeInUp} className="relative">
-                            <h3 className="text-4xl font-bold mb-10 text-white flex items-center gap-4">
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-white flex items-center gap-4">
                                 <span className="h-px w-12 bg-white/20" />
                                 {service.category}
                             </h3>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                                 {service.items.map((item, itemIndex) => (
                                     <CardSpotlight
                                         key={itemIndex}
-                                        className="min-h-[220px] flex flex-col group border-white/5"
+                                        className="min-h-[200px] flex flex-col group border-white/5 active:scale-[0.98] transition-transform"
                                     >
                                         <div className="relative z-20">
-                                            <h4 className="text-2xl font-bold mb-4 text-white group-hover:text-neutral-300 transition-colors duration-300">
+                                            <h4 className="text-xl md:text-2xl font-bold mb-3 text-white group-hover:text-neutral-300 transition-colors duration-300">
                                                 {item.title}
                                             </h4>
-                                            <p className="text-neutral-400 leading-relaxed font-medium">
+                                            <p className="text-sm md:text-base text-neutral-400 leading-relaxed font-medium">
                                                 {item.description}
                                             </p>
                                         </div>
