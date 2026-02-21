@@ -10,7 +10,7 @@ export default function PricingPage() {
     const plans = [
         {
             name: 'Fixed Monthly',
-            price: 'AED 5000',
+            price: 'AED 4999',
             period: '/ month',
             description: 'Predictable costs for established businesses.',
             highlight: 'Most Popular',
@@ -26,7 +26,7 @@ export default function PricingPage() {
         },
         {
             name: 'Fixed + Performance',
-            price: 'AED 3000',
+            price: 'AED 2999',
             period: '/ month + 3%',
             description: 'Best for brands scaling steadily.',
             highlight: 'Recommended',
