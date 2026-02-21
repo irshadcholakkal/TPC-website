@@ -49,16 +49,6 @@ export default function Hero() {
                         From Amazon to local marketplaces. we handle the complexity so you can simply grow.
                     </motion.p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-                        <a href="#contact" onClick={handleScroll} className="group relative">
-                            <button className="relative inline-flex h-12 w-full sm:w-64 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-white/20 active:scale-95 transition-transform will-change-transform">
-                                <span className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-40 will-change-transform" />
-                                <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-1 text-sm font-bold text-white backdrop-blur-3xl border border-white/15 transition-all duration-300 group-hover:bg-slate-950 relative z-10">
-                                    Get Started
-                                </span>
-                            </button>
-                        </a>
-                    </div>
                 </motion.div>
             </Container>
         </div>

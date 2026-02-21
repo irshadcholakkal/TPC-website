@@ -10,7 +10,7 @@ export default function PricingPage() {
     const plans = [
         {
             name: 'Fixed Monthly',
-            price: 'AED 4500',
+            price: 'AED 5000',
             period: '/ month',
             description: 'Predictable costs for established businesses.',
             highlight: 'Most Popular',
@@ -26,14 +26,14 @@ export default function PricingPage() {
         },
         {
             name: 'Fixed + Performance',
-            price: 'AED 2500',
-            period: '/ month + 2%',
+            price: 'AED 3000',
+            period: '/ month + 3%',
             description: 'Best for brands scaling steadily.',
             highlight: 'Recommended',
             features: [
                 'Everything in Fixed Monthly',
-                '2% of monthly sales',
-                'AED 2500 waived if sales > AED 100k',
+                '3% of monthly sales',
+                'AED 3000 waived if sales > AED 100k',
                 'Performance-based optimization',
                 'Priority support',
                 'Dedicated account manager'
@@ -42,7 +42,7 @@ export default function PricingPage() {
         },
         {
             name: 'Performance-Based',
-            price: '10-15%',
+            price: '18-25%',
             period: 'of monthly sales',
             description: 'No fixed monthly fee. Risk-free.',
             highlight: 'Limited / Partners Only',
