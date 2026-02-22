@@ -33,7 +33,6 @@ export default function PricingPage() {
             features: [
                 'Everything in Fixed Monthly',
                 '3% of monthly sales',
-                'AED 2999 waived if sales > AED 100k',
                 'Performance-based optimization',
                 'Priority support',
                 'Dedicated account manager'
