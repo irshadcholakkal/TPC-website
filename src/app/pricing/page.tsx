@@ -62,7 +62,6 @@ export default function PricingPage() {
                     : 'var(--bg-card)',
                   border: `1px solid ${isHighlighted ? 'rgba(139,92,246,0.4)' : 'var(--border)'}`,
                   boxShadow: isHighlighted ? 'var(--shadow-card), 0 0 50px rgba(139,92,246,0.12)' : 'var(--shadow-card)',
-                  ringColor: '#8B5CF6',
                 }}
               >
                 {/* Badge */}
