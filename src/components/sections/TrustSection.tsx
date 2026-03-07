@@ -1,62 +1,60 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Container from '@/components/ui/Container';
-import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { useLang } from '@/context/LanguageContext';
+
+const platforms = [
+  'Amazon', 'Shopify', 'Medusa', 'Noon', 'Keeta',
+  'Talabat', 'Smile', 'WhatsApp', 'Custom Store',
+];
 
 export default function TrustSection() {
-    const platforms = [
-        { name: 'Custom Store' },
-        { name: 'Shopify' },
-        { name: 'Medusa' },
-        { name: 'Amazon' },
-        { name: 'Noon' },
-        { name: 'Keeta' },
-        { name: 'Talabat' },
-        { name: 'Smile' },
-        { name: 'WhatsApp' },
+  const { t } = useLang();
+  // duplicate for seamless loop
+  const items = [...platforms, ...platforms];
 
-    ];
+  return (
+    <section className="relative py-16 overflow-hidden" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', backgroundColor: 'var(--bg-secondary)' }}>
+      <div className="max-w-7xl mx-auto px-5 md:px-8 mb-10 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-sm font-semibold uppercase tracking-widest"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {t.trust.heading}
+        </motion.p>
+      </div>
 
-    const items = platforms.map(p => ({
-        name: p.name,
+      {/* Infinite scroll ticker */}
+      <div className="relative overflow-hidden">
+        {/* Left fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, var(--bg-secondary), transparent)' }} />
+        {/* Right fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to left, var(--bg-secondary), transparent)' }} />
 
-        content: (
-            <div className="flex items-center justify-center gap-4">
-                {/* <div className="w-8 h-8 text-white">
-                </div> */}
-                <span className="text-xl font-bold text-gray-300">{p.name}</span>
+        <div className="flex gap-8 w-max animate-ticker">
+          {items.map((name, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 px-6 py-3 rounded-full border select-none whitespace-nowrap"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+            >
+              <span
+                className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+              />
+              <span className="text-sm font-semibold" style={{ color: 'var(--text-secondary)' }}>
+                {name}
+              </span>
             </div>
-        )
-    }
-
-
-    ));
-
-    return (
-        <section className="py-0 relative bg-black overflow-hidden">
-
-
-            <Container className="relative z-10">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-100px' }}
-                    variants={fadeInUp}
-
-                    className="text-center mb-12"
-                >
-                    <h2 className="text-xl md:text-3xl font-medium text-gray-400">
-                        We operate your business across leading platforms                    </h2>
-                </motion.div>
-
-                <InfiniteMovingCards
-                    items={items}
-                    direction="right"
-                    speed="normal"
-                />
-            </Container>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

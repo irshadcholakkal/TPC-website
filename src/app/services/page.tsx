@@ -1,129 +1,95 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Container from '@/components/ui/Container';
-import { CardSpotlight } from '@/components/ui/card-spotlight';
-import SectionHeading from '@/components/ui/SectionHeading';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { useLang } from '@/context/LanguageContext';
 
-const services = [
-    {
-        category: 'E-commerce Operations',
-        items: [
-            {
-                title: 'Product Catalog Management',
-                description: 'Complete product data setup, optimization, and maintenance across all platforms.',
-            },
-            {
-                title: 'Content Creation & Optimization',
-                description: 'SEO-optimized product titles, descriptions, and metadata for maximum visibility.',
-            },
-            {
-                title: 'Inventory Management',
-                description: 'Real-time stock tracking and synchronization across multiple channels.',
-            },
-        ],
-    },
-    {
-        category: 'Marketplace Management',
-        items: [
-            {
-                title: 'Multi-Platform Integration',
-                description: 'Seamless management across Amazon, Keeta, Talabat, Smile, and custom storefronts.',
-            },
-            {
-                title: 'Order Processing',
-                description: 'End-to-end order fulfillment, tracking, and customer communication.',
-            },
-            {
-                title: 'Pricing Strategy',
-                description: 'Dynamic pricing optimization based on competition and market trends.',
-            },
-        ],
-    },
-    {
-        category: 'Jewellery-Specific Handling',
-        items: [
-            {
-                title: 'Premium Product Photography',
-                description: 'Professional coordination for high-end jewellery product shoots.',
-            },
-            {
-                title: 'Detailed Specifications',
-                description: 'Accurate documentation of materials, dimensions, and certifications.',
-            },
-            {
-                title: 'Luxury Brand Positioning',
-                description: 'Maintain premium brand image across all customer touchpoints.',
-            },
-        ],
-    },
-    {
-        category: 'Reporting & Optimization',
-        items: [
-            {
-                title: 'Performance Analytics',
-                description: 'Comprehensive dashboards tracking sales, traffic, and conversion metrics.',
-            },
-            {
-                title: 'Actionable Insights',
-                description: 'Data-driven recommendations for growth and optimization.',
-            },
-            {
-                title: 'Regular Reporting',
-                description: 'Weekly and monthly reports with clear KPIs and progress tracking.',
-            },
-        ],
-    },
-];
+const icons = ['📦', '🛍️', '💎', '📊'];
+
+function ServiceCard({ title, description, index }: { title: string; description: string; index: number }) {
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      className="glass-card p-7 group cursor-default"
+    >
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-sm font-black font-heading"
+        style={{ background: 'rgba(139,92,246,0.1)', color: '#8B5CF6', border: '1px solid rgba(139,92,246,0.2)' }}
+      >
+        {String(index + 1).padStart(2, '0')}
+      </div>
+      <h4 className="text-[17px] font-bold mb-2.5 tracking-tight" style={{ color: 'var(--text-primary)' }}>
+        {title}
+      </h4>
+      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+        {description}
+      </p>
+    </motion.div>
+  );
+}
 
 export default function ServicesPage() {
-    return (
-        <main className="relative min-h-screen pt-32 pb-24 bg-black overflow-hidden">
-          
-            <Container className="relative z-10 px-4">
-                <SectionHeading
-                    title="Our Services"
-                    subtitle="Comprehensive e-commerce management tailored for premium brands"
-                    className="mb-16 md:mb-24"
-                    titleClassName="text-4xl sm:text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
-                />
+  const { t, isRTL } = useLang();
 
-                <motion.div
-                    className="space-y-16 md:space-y-24"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={staggerContainer}
+  return (
+    <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
+        style={{ background: 'radial-gradient(ellipse, #8B5CF6, transparent 70%)' }}
+      />
+
+      <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <span className="badge mb-5">{t.services.badge}</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight mb-5 text-gradient-white">
+            {t.services.title}
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            {t.services.subtitle}
+          </p>
+        </motion.div>
+
+        <div className="space-y-16 md:space-y-20">
+          {t.services.categories.map((service, catIndex) => (
+            <motion.div
+              key={catIndex}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: catIndex * 0.08 }}
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <div
+                  className="flex items-center justify-center w-10 h-10 rounded-xl text-xl"
+                  style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.2)' }}
                 >
-                    {services.map((service, index) => (
-                        <motion.div key={index} variants={fadeInUp} className="relative">
-                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                                <span className="h-px w-12 bg-white/20" />
-                                {service.category}
-                            </h3>
+                  {icons[catIndex]}
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                  {service.category}
+                </h3>
+                <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
+              </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                                {service.items.map((item, itemIndex) => (
-                                    <CardSpotlight
-                                        key={itemIndex}
-                                        className="min-h-[200px] flex flex-col group border-white/5 active:scale-[0.98] transition-transform"
-                                    >
-                                        <div className="relative z-20">
-                                            <h4 className="text-xl md:text-2xl font-bold mb-3 text-white group-hover:text-neutral-300 transition-colors duration-300">
-                                                {item.title}
-                                            </h4>
-                                            <p className="text-sm md:text-base text-neutral-400 leading-relaxed font-medium">
-                                                {item.description}
-                                            </p>
-                                        </div>
-                                    </CardSpotlight>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </Container>
-        </main>
-    );
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {service.items.map((item, itemIndex) => (
+                  <ServiceCard
+                    key={itemIndex}
+                    title={item.title}
+                    description={item.description}
+                    index={itemIndex}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,183 +1,229 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useTheme } from '@/context/ThemeContext';
+import { useLang } from '@/context/LanguageContext';
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
 
 export default function Navigation() {
-    const pathname = usePathname();
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [hidden, setHidden] = useState(false);
-    const { scrollY } = useScroll();
+  const { theme, toggleTheme } = useTheme();
+  const { lang, setLang, t } = useLang();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const { scrollY } = useScroll();
 
-    const [activeSection, setActiveSection] = useState('hero');
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrolled(latest > 20);
+  });
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        const previous = scrollY.getPrevious() ?? 0;
-        if (latest > previous && latest > 150) {
-            setHidden(true);
-        } else {
-            setHidden(false);
-        }
-    });
+  const links = [
+    { href: '#hero', label: t.nav.home },
+    { href: '#services', label: t.nav.services },
+    { href: '#how-it-works', label: t.nav.howItWorks },
+    { href: '#testimonials', label: t.nav.about },
+    { href: '#pricing', label: t.nav.pricing },
+    { href: '#contact', label: t.nav.contact },
+  ];
 
-    const links = [
-        { href: '#hero', label: 'Home', isAnchor: true },
-        { href: '#services', label: 'Services', isAnchor: true },
-        { href: '#how-it-works', label: 'How It Works', isAnchor: true },
-        { href: '#testimonials', label: 'About', isAnchor: true },
-        { href: '#pricing', label: 'Pricing', isAnchor: true },
-        { href: '#contact', label: 'Contact', isAnchor: true },
-    ];
-
-    useEffect(() => {
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -70% 0px',
-            threshold: 0,
-        };
-
-        const observerCallback = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        links.forEach((link) => {
-            if (link.href.startsWith('#')) {
-                const element = document.getElementById(link.href.substring(1));
-                if (element) observer.observe(element);
-            }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
-
-        return () => observer.disconnect();
-    }, []);
-
-    const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setMobileMenuOpen(false);
-            }
-        }
-    };
-
-    return (
-        <motion.nav
-            variants={{
-                visible: { y: 0 },
-                hidden: { y: "-100%" },
-            }}
-            // animate={hidden ? "hidden" : "visible"}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-2xl border-b border-white/10"
-        >
-            <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <a
-                        href="#hero"
-                        onClick={(e) => handleSmoothScroll(e, '#hero')}
-                        className="text-xl font-bold font-heading bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400 hover:opacity-80 transition-opacity duration-300 cursor-pointer"
-                    >
-                        The Percentage Company
-                    </a>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
-                        {links.map((link) => {
-                            const isActive = activeSection === link.href.substring(1);
-                            return (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={(e) => handleSmoothScroll(e, link.href)}
-                                    className={`text-sm font-medium transition-all duration-300 relative cursor-pointer ${isActive ? 'text-white' : 'text-neutral-400 hover:text-white'
-                                        }`}
-                                >
-                                    {link.label}
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="activeNav"
-                                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white rounded-full"
-                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                        />
-                                    )}
-                                </a>
-                            );
-                        })}
-
-                        {/* <Link href="/contact" className="relative h-10 px-6 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-white/20">
-                            <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#a3a3a3_50%,#ffffff_100%)] opacity-30" />
-                            <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-6 py-1 text-sm font-bold text-white backdrop-blur-3xl transition-all duration-300 hover:bg-white/10 border border-white/10 relative z-10">
-                                Get Started
-                            </span>
-                        </Link> */}
-
-                        <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm font-semibold hover:bg-white/10 transition-all duration-300 cursor-pointer">
-                            Get Started
-                        </a>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden text-white p-2"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {mobileMenuOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
-                    </button>
-                </div>
-
-                {/* Mobile Menu */}
-                {mobileMenuOpen && (
-                    <motion.div
-                        className="md:hidden py-6 border-t border-white/5 bg-black/95 backdrop-blur-2xl"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                    >
-                        <div className="flex flex-col gap-2 px-6">
-                            {links.map((link) => {
-                                const isActive = activeSection === link.href.substring(1);
-                                return (
-                                    <a
-                                        key={link.href}
-                                        href={link.href}
-                                        onClick={(e) => handleSmoothScroll(e, link.href)}
-                                        className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 cursor-pointer ${isActive
-                                            ? 'text-white bg-white/10'
-                                            : 'text-neutral-400 hover:text-white hover:bg-white/5'
-                                            }`}
-                                    >
-                                        {link.label}
-                                    </a>
-                                );
-                            })}
-                            <a
-                                href="#contact"
-                                onClick={(e) => handleSmoothScroll(e, '#contact')}
-                                className="block px-4 py-3 mt-2 text-center bg-white/5 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                            >
-                                Get Started
-                            </a>
-                        </div>
-                    </motion.div>
-                )}
-            </div >
-        </motion.nav >
+      },
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
     );
+    links.forEach((link) => {
+      const el = document.getElementById(link.href.substring(1));
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [lang]);
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  return (
+    <motion.nav
+      initial={false}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'backdrop-blur-2xl border-b'
+          : 'border-b border-transparent'
+      }`}
+      style={{
+        backgroundColor: scrolled ? 'color-mix(in srgb, var(--bg-primary) 85%, transparent)' : 'transparent',
+        borderColor: scrolled ? 'var(--border)' : 'transparent',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-[68px]">
+          {/* Logo */}
+          <a
+            href="#hero"
+            onClick={(e) => handleSmoothScroll(e, '#hero')}
+            className="text-[17px] font-bold font-heading cursor-pointer flex items-center gap-2.5 select-none"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            <span
+              className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-xs font-black"
+              style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+            >
+              TPC
+            </span>
+            <span className="hidden sm:inline">The Percentage Co.</span>
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {links.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full cursor-pointer transition-all duration-200 ${
+                    isActive ? 'font-semibold' : ''
+                  }`}
+                  style={{
+                    color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                    background: isActive ? 'var(--bg-card)' : 'transparent',
+                    border: isActive ? '1px solid var(--border)' : '1px solid transparent',
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+              className="toggle-btn text-xs font-bold tracking-wide"
+              aria-label="Switch language"
+              title={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+            >
+              {lang === 'en' ? 'AR' : 'EN'}
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="toggle-btn"
+              aria-label="Toggle theme"
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            </button>
+
+            {/* CTA */}
+            <a
+              href="#contact"
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
+              className="btn-accent hidden md:inline-flex text-sm px-5 py-2"
+            >
+              {t.nav.getStarted}
+            </a>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="md:hidden toggle-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                {mobileMenuOpen ? (
+                  <>
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </>
+                ) : (
+                  <>
+                    <line x1="3" y1="7" x2="21" y2="7" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="17" x2="21" y2="17" />
+                  </>
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden pb-5 border-t"
+            style={{ borderColor: 'var(--border)' }}
+          >
+            <div className="flex flex-col gap-1 pt-4">
+              {links.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    className="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer"
+                    style={{
+                      color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+                      background: isActive ? 'var(--bg-card)' : 'transparent',
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
+              <a
+                href="#contact"
+                onClick={(e) => handleSmoothScroll(e, '#contact')}
+                className="btn-accent mt-3 text-sm"
+              >
+                {t.nav.getStarted}
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </motion.nav>
+  );
 }
