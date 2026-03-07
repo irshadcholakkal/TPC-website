@@ -46,7 +46,7 @@ export default function TrustSection() {
             >
               <span
                 className="w-2 h-2 rounded-full flex-shrink-0"
-                style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+                style={{ background: 'linear-gradient(135deg, #F97316, #F97316)' }}
               />
               <span className="text-sm font-semibold" style={{ color: 'var(--text-secondary)' }}>
                 {name}

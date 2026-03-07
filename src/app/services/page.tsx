@@ -13,7 +13,7 @@ function ServiceCard({ title, description, index }: { title: string; description
     >
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-sm font-black font-heading"
-        style={{ background: 'rgba(139,92,246,0.1)', color: '#8B5CF6', border: '1px solid rgba(139,92,246,0.2)' }}
+        style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316', border: '1px solid rgba(249,115,22,0.2)' }}
       >
         {String(index + 1).padStart(2, '0')}
       </div>
@@ -34,7 +34,7 @@ export default function ServicesPage() {
     <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div
         className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #8B5CF6, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
       />
 
       <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
               <div className="flex items-center gap-4 mb-8">
                 <div
                   className="flex items-center justify-center w-10 h-10 rounded-xl text-xl"
-                  style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.2)' }}
+                  style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.2)' }}
                 >
                   {icons[catIndex]}
                 </div>

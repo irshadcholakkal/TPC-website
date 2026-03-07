@@ -24,7 +24,7 @@ export default function Footer() {
       {/* Top gradient accent */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-1 pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.6), rgba(99,102,241,0.6), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(249,115,22,0.6), rgba(234,108,10,0.6), transparent)' }}
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-14">
@@ -35,7 +35,7 @@ export default function Footer() {
               <div className="flex items-center gap-2.5 mb-4">
                 <span
                   className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-xs font-black"
-                  style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+                  style={{ background: 'linear-gradient(135deg, #F97316, #F97316)' }}
                 >
                   TPC
                 </span>
@@ -61,7 +61,7 @@ export default function Footer() {
                 />
                 <button
                   className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-white transition-opacity hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+                  style={{ background: 'linear-gradient(135deg, #F97316, #F97316)' }}
                 >
                   <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                     <line x1="3" y1="8" x2="13" y2="8" />

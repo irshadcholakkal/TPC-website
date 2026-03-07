@@ -99,7 +99,7 @@ export default function Navigation() {
           >
             <span
               className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-xs font-black"
-              style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1)' }}
+              style={{ background: 'linear-gradient(135deg, #F97316, #EA6C0A)' }}
             >
               TPC
             </span>

@@ -21,7 +21,7 @@ export default function PricingPage() {
     <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #8B5CF6, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
       />
 
       <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -58,10 +58,10 @@ export default function PricingPage() {
                 className={`relative flex flex-col rounded-2xl overflow-hidden ${isHighlighted ? 'ring-2' : ''}`}
                 style={{
                   background: isHighlighted
-                    ? 'linear-gradient(160deg, rgba(139,92,246,0.12) 0%, var(--bg-card) 40%)'
+                    ? 'linear-gradient(160deg, rgba(249,115,22,0.12) 0%, var(--bg-card) 40%)'
                     : 'var(--bg-card)',
-                  border: `1px solid ${isHighlighted ? 'rgba(139,92,246,0.4)' : 'var(--border)'}`,
-                  boxShadow: isHighlighted ? 'var(--shadow-card), 0 0 50px rgba(139,92,246,0.12)' : 'var(--shadow-card)',
+                  border: `1px solid ${isHighlighted ? 'rgba(249,115,22,0.4)' : 'var(--border)'}`,
+                  boxShadow: isHighlighted ? 'var(--shadow-card), 0 0 50px rgba(249,115,22,0.12)' : 'var(--shadow-card)',
                 }}
               >
                 {/* Badge */}
@@ -71,7 +71,7 @@ export default function PricingPage() {
                       className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
                       style={
                         isHighlighted
-                          ? { background: 'linear-gradient(135deg, #8B5CF6, #6366F1)', color: '#fff' }
+                          ? { background: 'linear-gradient(135deg, #F97316, #F97316)', color: '#fff' }
                           : { background: 'var(--bg-secondary)', color: 'var(--text-muted)', border: '1px solid var(--border)' }
                       }
                     >
@@ -89,7 +89,7 @@ export default function PricingPage() {
                     <div className="flex items-baseline gap-1 mb-1">
                       <span
                         className="text-4xl lg:text-5xl font-black font-heading tracking-tight"
-                        style={{ color: isHighlighted ? '#A78BFA' : 'var(--text-primary)' }}
+                        style={{ color: isHighlighted ? '#FB923C' : 'var(--text-primary)' }}
                       >
                         {plan.price}
                       </span>
@@ -111,7 +111,7 @@ export default function PricingPage() {
                       <li key={i} className="flex items-start gap-3">
                         <span
                           className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center"
-                          style={{ background: isHighlighted ? 'rgba(139,92,246,0.2)' : 'var(--bg-secondary)', color: '#A78BFA' }}
+                          style={{ background: isHighlighted ? 'rgba(249,115,22,0.2)' : 'var(--bg-secondary)', color: '#FB923C' }}
                         >
                           <CheckIcon />
                         </span>

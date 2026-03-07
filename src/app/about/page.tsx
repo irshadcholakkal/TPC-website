@@ -10,7 +10,7 @@ export default function AboutPage() {
     <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.04]"
-        style={{ background: 'radial-gradient(ellipse, #8B5CF6, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
       />
 
       <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -44,7 +44,7 @@ export default function AboutPage() {
             {/* Accent corner */}
             <div
               className="absolute top-0 right-0 w-40 h-40 rounded-full blur-2xl opacity-10 pointer-events-none"
-              style={{ background: 'radial-gradient(#8B5CF6, transparent)' }}
+              style={{ background: 'radial-gradient(#F97316, transparent)' }}
             />
             <div className="relative z-10 space-y-6">
               <p className="text-xl md:text-2xl leading-relaxed font-light" style={{ color: 'var(--text-primary)' }}>
@@ -54,7 +54,7 @@ export default function AboutPage() {
                     : <span key={i}>{part}</span>
                 )}
               </p>
-              <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, #8B5CF6, transparent)' }} />
+              <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, #F97316, transparent)' }} />
               <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 {t.about.mission2}
               </p>
@@ -95,9 +95,9 @@ export default function AboutPage() {
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 text-sm font-black"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(99,102,241,0.15))',
-                      border: '1px solid rgba(139,92,246,0.25)',
-                      color: '#A78BFA',
+                      background: 'linear-gradient(135deg, rgba(249,115,22,0.15), rgba(234,108,10,0.15))',
+                      border: '1px solid rgba(249,115,22,0.25)',
+                      color: '#FB923C',
                     }}
                   >
                     {value.icon}

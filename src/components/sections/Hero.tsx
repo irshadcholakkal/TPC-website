@@ -37,11 +37,11 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-[-20%] left-[50%] -translate-x-1/2 w-[900px] h-[600px] rounded-full blur-3xl opacity-20"
-          style={{ background: 'radial-gradient(ellipse, #8B5CF6 0%, #6366F1 40%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse, #F97316 0%, #EA6C0A 40%, transparent 70%)' }}
         />
         <div
           className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full blur-3xl opacity-10"
-          style={{ background: 'radial-gradient(ellipse, #6366F1 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse, #EA6C0A 0%, transparent 70%)' }}
         />
         {/* Grid pattern */}
         <div

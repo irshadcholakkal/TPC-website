@@ -11,7 +11,7 @@ export default function HowItWorksPage() {
       {/* Accent orb */}
       <div
         className="absolute bottom-0 left-0 w-[600px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.05]"
-        style={{ background: 'radial-gradient(ellipse, #6366F1, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
       />
 
       <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -61,9 +61,9 @@ export default function HowItWorksPage() {
                         <div
                           className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm"
                           style={{
-                            background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(99,102,241,0.15))',
-                            border: '1px solid rgba(139,92,246,0.25)',
-                            color: '#A78BFA',
+                            background: 'linear-gradient(135deg, rgba(249,115,22,0.15), rgba(234,108,10,0.15))',
+                            border: '1px solid rgba(249,115,22,0.25)',
+                            color: '#FB923C',
                           }}
                         >
                           {step.number}
@@ -75,7 +75,7 @@ export default function HowItWorksPage() {
                             </h3>
                             <span
                               className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"
-                              style={{ background: 'rgba(139,92,246,0.1)', color: '#A78BFA', border: '1px solid rgba(139,92,246,0.2)' }}
+                              style={{ background: 'rgba(249,115,22,0.1)', color: '#FB923C', border: '1px solid rgba(249,115,22,0.2)' }}
                             >
                               {step.duration}
                             </span>
@@ -92,14 +92,14 @@ export default function HowItWorksPage() {
                   <div className="hidden md:flex relative items-center justify-center w-6 h-6 flex-shrink-0 z-10">
                     <div
                       className="absolute inset-0 rounded-full animate-ping opacity-30"
-                      style={{ background: '#8B5CF6' }}
+                      style={{ background: '#F97316' }}
                     />
                     <div
                       className="w-4 h-4 rounded-full z-20 border-2"
                       style={{
-                        background: 'linear-gradient(135deg, #8B5CF6, #6366F1)',
+                        background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
                         borderColor: 'var(--bg-secondary)',
-                        boxShadow: '0 0 12px rgba(139,92,246,0.5)',
+                        boxShadow: '0 0 12px rgba(249,115,22,0.5)',
                       }}
                     />
                   </div>

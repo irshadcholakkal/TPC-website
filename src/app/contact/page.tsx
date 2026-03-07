@@ -59,7 +59,7 @@ export default function ContactPage() {
     <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div
         className="absolute bottom-0 right-0 w-[500px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #8B5CF6, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
       />
 
       <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="p-4 rounded-xl text-sm text-center font-medium"
-                  style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.25)', color: '#A78BFA' }}
+                  style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)', color: '#FB923C' }}
                 >
                   {t.contact.success}
                 </motion.div>

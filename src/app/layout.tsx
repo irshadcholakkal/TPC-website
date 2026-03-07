@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 
-const outfit = Outfit({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" data-theme="light" className={`${sora.variable} ${inter.variable}`}>
       <body className="antialiased font-body" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
         <ThemeProvider>
           <LanguageProvider>
