@@ -2,283 +2,301 @@ export const en = {
   nav: {
     home: 'Home',
     services: 'Services',
-    howItWorks: 'How It Works',
-    about: 'About',
+    process: 'Process',
     pricing: 'Pricing',
     contact: 'Contact',
-    getStarted: 'Get Started',
+    getStarted: 'Get Free Audit',
   },
   hero: {
-    badge: 'Trusted E-commerce Partner',
-    headline1: 'Your All-in-One',
-    headline2: 'E-commerce',
-    flipWords: ['Operations', 'Solutions', 'Platform'],
+    badge: 'UAE-Based · RAKEZ Registered · Performance-Driven',
+    headline1: "We Don't Just Build.",
+    headline2: 'We Grow.',
     subheadline:
-      'We synchronize your inventory, logistics, and analytics across all channels. From Amazon to local marketplaces — we handle the complexity so you can simply grow.',
-    cta: 'Book a Free Consultation',
-    ctaSecondary: 'View Pricing',
+      'The Percentage is your full-stack e-commerce partner — from strategy and development to marketplace management and performance marketing. We take a percentage. You take the growth.',
+    cta: 'Get a Free Audit',
+    ctaSecondary: 'See What We Do',
     stats: [
-      { value: '50+', label: 'Brands Managed' },
-      { value: '10+', label: 'Platforms' },
-      { value: '99%', label: 'Client Retention' },
+      { value: '100%', label: 'Focused on E-Commerce' },
+      { value: '2%', label: 'Commission Only' },
+      { value: '24/7', label: 'Operations Support' },
     ],
   },
   trust: {
     heading: 'We operate your business across leading platforms',
   },
+  about: {
+    badge: 'Who We Are',
+    headline: 'A Company That Earns Its Place — Every Month.',
+    body: [
+      'The Percentage FZ-LLC is a UAE-based e-commerce solutions company built on one simple principle: we only succeed when you do.',
+      'We manage, build, and grow e-commerce businesses across marketplaces and direct-to-consumer channels — taking a percentage of the results we deliver, not just a retainer fee for showing up.',
+      'From Amazon.ae and Noon.com marketplace optimization to custom website development, creative production, and performance marketing — we are your operations team, your tech team, and your growth team in one.',
+      'We are registered under the RAK Economic Zone (RAKEZ), operating out of the UAE, serving brands that are serious about scaling.',
+    ],
+    cta: 'Work With Us',
+  },
   services: {
     badge: 'What We Do',
-    title: 'Our Services',
-    subtitle: 'Comprehensive e-commerce management tailored for premium brands',
-    categories: [
+    title1: 'Full-Stack E-Commerce.',
+    title2: 'Nothing Left Out.',
+    subtitle: 'End-to-end solutions for UAE e-commerce brands ready to scale.',
+    items: [
       {
-        category: 'E-commerce Operations',
-        items: [
-          {
-            title: 'Product Catalog Management',
-            description:
-              'Complete product data setup, optimization, and maintenance across all platforms.',
-          },
-          {
-            title: 'Content Creation & Optimization',
-            description:
-              'SEO-optimized product titles, descriptions, and metadata for maximum visibility.',
-          },
-          {
-            title: 'Inventory Management',
-            description:
-              'Real-time stock tracking and synchronization across multiple channels.',
-          },
-        ],
+        icon: '🛒',
+        title: 'Marketplace Management',
+        description:
+          'We handle your entire Amazon.ae and Noon.com presence — product listings, SEO optimization, A+ content, advertising campaigns, inventory coordination, and sales conversion. You focus on your product. We focus on your rank.',
       },
       {
-        category: 'Marketplace Management',
-        items: [
-          {
-            title: 'Multi-Platform Integration',
-            description:
-              'Seamless management across Amazon, Keeta, Talabat, Smile, and custom storefronts.',
-          },
-          {
-            title: 'Order Processing',
-            description:
-              'End-to-end order fulfillment, tracking, and customer communication.',
-          },
-          {
-            title: 'Pricing Strategy',
-            description:
-              'Dynamic pricing optimization based on competition and market trends.',
-          },
-        ],
+        icon: '💻',
+        title: 'E-Commerce Website Development',
+        description:
+          'Custom-built online stores designed to convert visitors into buyers. Fast, mobile-first websites with payment integration, inventory systems, and user experiences built for the UAE market.',
       },
       {
-        category: 'Jewellery-Specific Handling',
-        items: [
-          {
-            title: 'Premium Product Photography',
-            description:
-              'Professional coordination for high-end jewellery product shoots.',
-          },
-          {
-            title: 'Detailed Specifications',
-            description:
-              'Accurate documentation of materials, dimensions, and certifications.',
-          },
-          {
-            title: 'Luxury Brand Positioning',
-            description:
-              'Maintain premium brand image across all customer touchpoints.',
-          },
-        ],
+        icon: '📱',
+        title: 'Mobile App Development',
+        description:
+          "Your brand in your customer's pocket. We build custom mobile applications for iOS and Android — connected to your store, your inventory, and your marketing stack.",
       },
       {
-        category: 'Reporting & Optimization',
-        items: [
-          {
-            title: 'Performance Analytics',
-            description:
-              'Comprehensive dashboards tracking sales, traffic, and conversion metrics.',
-          },
-          {
-            title: 'Actionable Insights',
-            description:
-              'Data-driven recommendations for growth and optimization.',
-          },
-          {
-            title: 'Regular Reporting',
-            description:
-              'Weekly and monthly reports with clear KPIs and progress tracking.',
-          },
-        ],
+        icon: '📊',
+        title: 'Performance & Growth Marketing',
+        description:
+          'Data-driven ad campaigns across Google, Meta, TikTok, and marketplace ad platforms. Every dirham tracked. Every campaign optimized for maximum return on ad spend.',
+      },
+      {
+        icon: '🎨',
+        title: 'Creative Production',
+        description:
+          'Product photography direction, video content, graphic design, and brand visuals — built to stop scrolling and start converting. We produce content that sells.',
+      },
+      {
+        icon: '⚙️',
+        title: 'Custom Software & Systems',
+        description:
+          'Need something built from scratch? We architect and develop custom software, ERP integrations, automation tools, and management dashboards tailored to your operations.',
       },
     ],
   },
   howItWorks: {
     badge: 'Our Process',
-    title: 'How It Works',
-    subtitle: 'A systematic approach to e-commerce excellence',
+    title: 'Simple. Structured. Results First.',
+    subtitle: 'From first conversation to full-scale operations — we move fast.',
     steps: [
       {
         number: '01',
-        title: 'Audit & Onboarding',
+        title: 'Free Audit',
         description:
-          'Comprehensive review of your current operations, platforms, and goals. We identify opportunities and establish clear KPIs.',
-        duration: '1–2 weeks',
+          'We analyze your current e-commerce presence, identify revenue leaks, and map out the biggest growth opportunities. No cost. No obligation.',
+        duration: 'Day 1',
       },
       {
         number: '02',
-        title: 'Platform Setup',
+        title: 'Strategy & Proposal',
         description:
-          'Integration with your existing systems, catalog migration, and optimization. Complete setup across all relevant marketplaces.',
-        duration: '2–3 weeks',
+          "We present a tailored growth plan with clear scope, timeline, and pricing. You know exactly what we'll do and what it will cost.",
+        duration: 'Day 2–3',
       },
       {
         number: '03',
-        title: 'Weekly Operational Cycles',
+        title: 'Onboarding & Execution',
         description:
-          'Ongoing management of orders, inventory, pricing, and content. Regular optimization based on performance data.',
-        duration: 'Continuous',
+          'We plug into your operations within days — not weeks. Our team takes ownership of deliverables and moves fast.',
+        duration: 'Day 5–7',
       },
       {
         number: '04',
-        title: 'Monitoring & Reporting',
+        title: 'Grow & Scale',
         description:
-          'Real-time performance tracking with weekly updates and monthly strategic reviews. Data-driven recommendations for growth.',
-        duration: 'Continuous',
-      },
-    ],
-  },
-  about: {
-    badge: 'About The Percentage Company',
-    title1: 'Built for Serious',
-    title2: 'Operators',
-    subtitle: 'E-commerce management as a strategic function, not a commodity service',
-    mission1:
-      'We manage e-commerce operations for jewellery and retail brands that demand excellence.',
-    mission2:
-      'Our approach is systematic, data-driven, and focused on sustainable growth across Amazon, Keeta, Talabat, Smile, WhatsApp Commerce, and custom platforms.',
-    mission3: 'No marketing fluff. No startup hype. Just disciplined execution.',
-    valuesTitle: 'Our Core Values',
-    valuesSubtitle: 'The principles that guide everything we do',
-    values: [
-      {
-        title: 'Systems-Driven Excellence',
-        description:
-          'We build repeatable, scalable processes. Every operation is documented, optimized, and continuously improved.',
-        icon: '01',
-      },
-      {
-        title: 'Operational Mastery',
-        description:
-          'Execution excellence is our foundation. We deliver consistent, measurable results through disciplined operations.',
-        icon: '02',
-      },
-      {
-        title: 'Complete Accountability',
-        description:
-          'Clear metrics, transparent reporting, and ownership of outcomes. We measure what matters.',
-        icon: '03',
-      },
-      {
-        title: 'Long-Term Partnerships',
-        description:
-          'We invest in understanding your business deeply. Success is measured in sustained growth, not short-term wins.',
-        icon: '04',
+          'Monthly reporting. Continuous optimization. We track every metric that matters and reinvest effort where it returns the most.',
+        duration: 'Ongoing',
       },
     ],
   },
   pricing: {
     badge: 'Pricing',
-    title1: 'Simple Pricing.',
-    title2: 'Clear Responsibility.',
-    subtitle: 'Choose the model that aligns with your business stage and goals.',
-    note: 'All plans include secure data handling, regular backups, and compliance with platform policies. Custom enterprise solutions available for larger operations.',
-    cta: 'Book a Call',
-    plans: [
+    title1: 'Transparent Pricing.',
+    title2: 'No Surprises.',
+    subtitle:
+      'A flat monthly service fee plus a small commission on net revenue. We only earn more when you earn more.',
+    starting: 'Starting From',
+    fee: 'AED 2,500',
+    feeNote: '/ month · per service',
+    commission: '+ 2% Commission on Net Revenue',
+    features: [
+      'No lock-in contracts',
+      'Clear scope per engagement',
+      'Performance-aligned model',
+      'UAE-based team',
+    ],
+    note: 'Client responsibilities include: domain, hosting, ad spend, and logistics costs. We handle everything else.',
+    cta: 'Request a Custom Quote',
+  },
+  whyUs: {
+    badge: 'Why The Percentage',
+    title1: "We Don't Get Paid to Try.",
+    title2: 'We Get Paid to Deliver.',
+    points: [
       {
-        name: 'Fixed Monthly',
-        price: 'AED 4,999',
-        period: '/ month',
-        description: 'Predictable costs for established businesses.',
-        highlight: 'Most Popular',
-        features: [
-          'Complete catalog management',
-          'Order processing',
-          'Weekly performance reports',
-          'Email & WhatsApp support',
-          'Unlimited SKUs',
-          'No sales percentage taken',
-        ],
+        title: 'Performance-Linked Model',
+        description:
+          "Our 2% commission means our incentives are perfectly aligned with yours. We grow — or we don't earn.",
       },
       {
-        name: 'Fixed + Performance',
-        price: 'AED 2,999',
-        period: '/ month + 3%',
-        description: 'Best for brands scaling steadily.',
-        highlight: 'Recommended',
-        features: [
-          'Everything in Fixed Monthly',
-          '3% of monthly sales',
-          'Performance-based optimization',
-          'Priority support',
-          'Dedicated account manager',
-        ],
+        title: 'UAE Market Expertise',
+        description:
+          'We understand local consumer behavior, marketplace rules, logistics realities, and what actually works in the region.',
       },
       {
-        name: 'Performance-Based',
-        price: '18–25%',
-        period: 'of monthly sales',
-        description: 'No fixed monthly fee. Risk-free.',
-        highlight: 'Limited / Partners Only',
-        features: [
-          'Zero fixed costs',
-          'Full-service management',
-          'Revenue share model',
-          'Full performance accountability',
-          'Strict qualification criteria',
-        ],
+        title: 'One Team, Full Stack',
+        description:
+          'No agency handoffs. No outsourced work hidden behind a polished pitch. One team manages everything end-to-end.',
+      },
+      {
+        title: 'Transparent Operations',
+        description:
+          'You get clear reporting, honest numbers, and direct access to the people doing the work — every month.',
+      },
+      {
+        title: 'Fast Onboarding',
+        description:
+          'We move in days, not months. Our processes are ready. We adapt to your business quickly and start delivering early.',
+      },
+      {
+        title: 'Registered & Compliant',
+        description:
+          'RAKEZ-registered. Professionally structured. We operate as a proper business partner, not a freelancer arrangement.',
+      },
+    ],
+  },
+  industries: {
+    badge: 'Who We Serve',
+    title: 'Built for UAE E-Commerce Operators.',
+    subtitle:
+      "Whether you're a brand launching for the first time, an importer selling on Amazon.ae and Noon.com, a retailer taking your store online, or a D2C brand ready to scale — we have the team and the tools to move you forward.",
+    tags: [
+      'Consumer Electronics',
+      'Fashion & Apparel',
+      'Health & Beauty',
+      'Home & Living',
+      'Grocery & FMCG',
+      'Sporting Goods',
+      'Toys & Kids',
+      'Automotive Accessories',
+      'Industrial Supplies',
+    ],
+  },
+  testimonials: {
+    badge: 'Client Results',
+    title: 'Revenue Up. Problems Down.',
+    items: [
+      {
+        quote:
+          'The Percentage took over our Amazon.ae account and tripled our monthly sales within 90 days. The reporting is clear, the team is fast, and they actually deliver.',
+        author: 'E-Commerce Brand',
+        location: 'Dubai',
+      },
+      {
+        quote:
+          'We launched our Noon.com store with zero experience. The Percentage handled everything — from listing to advertising to fulfilment coordination. Highly recommended.',
+        author: 'Consumer Electronics Seller',
+        location: 'Abu Dhabi',
+      },
+    ],
+  },
+  faq: {
+    badge: 'Common Questions',
+    title: 'Clear Answers. No Fluff.',
+    items: [
+      {
+        q: 'What does the 2% commission apply to?',
+        a: 'The 2% is calculated on net revenue generated through the channels we manage — after deducting returns, VAT, and marketplace fees. It is paid monthly alongside the retainer.',
+      },
+      {
+        q: 'Do I need to sign a long-term contract?',
+        a: 'No. We operate on monthly agreements with a notice period. Our goal is to earn your continued business through results, not through contractual lock-in.',
+      },
+      {
+        q: 'What costs am I responsible for?',
+        a: 'Clients cover domain registration, hosting, advertising spend, and logistics costs. The Percentage covers all service delivery — strategy, management, creative, and development.',
+      },
+      {
+        q: 'How quickly can you start?',
+        a: 'Typically within 5–7 business days of signing the agreement and completing onboarding. For marketplace management, we can begin optimizations even faster.',
+      },
+      {
+        q: 'Do you work with businesses outside the UAE?',
+        a: 'Our primary focus is the UAE and GCC market. However, we are open to regional projects on a case-by-case basis.',
+      },
+      {
+        q: 'Can I hire you for one service only?',
+        a: 'Absolutely. Each service is priced and scoped independently. You can start with one and add more as your business grows.',
       },
     ],
   },
   contact: {
-    badge: 'Get In Touch',
-    title: "Let's Talk Business",
-    subtitle: 'We respond to all serious inquiries within 24 hours.',
+    badge: "Let's Talk",
+    title: 'Ready to Grow?',
+    subtitle: 'Start With a Free Audit.',
+    body: "Tell us about your business and we'll identify exactly where you're leaving money on the table — at no cost and no commitment.",
+    phone: '+971 50 633 1903',
+    email: 'thepercentage@outlook.com',
+    website: 'thepercentagecompany.com',
+    address: 'RAK Economic Zone (RAKEZ), UAE',
     fields: {
-      name: 'Name',
-      namePlaceholder: 'Your name',
+      fullName: 'Full Name',
+      fullNamePlaceholder: 'Your full name',
+      businessName: 'Business Name',
+      businessNamePlaceholder: 'Your brand or company',
       email: 'Email Address',
-      emailPlaceholder: 'operations@yourbrand.com',
-      company: 'Company Name',
-      companyPlaceholder: 'Enter your brand or company name',
-      message: 'Operational Requirements',
-      messagePlaceholder:
-        'Describe your current e-commerce setup and how we can assist…',
+      emailPlaceholder: 'you@yourbrand.com',
+      phone: 'Phone / WhatsApp',
+      phonePlaceholder: '+971 50 000 0000',
+      service: 'What are you looking for?',
+      serviceOptions: [
+        'Marketplace Management (Amazon / Noon)',
+        'E-Commerce Website',
+        'Mobile App',
+        'Performance Marketing',
+        'Creative Production',
+        'Custom Software',
+        'Full-Service Partnership',
+        'Not sure — I need advice',
+      ],
+      message: 'Message (optional)',
+      messagePlaceholder: 'Tell us more about your business...',
     },
-    submit: 'Submit Inquiry',
-    submitting: 'Sending…',
-    success: "Thank you! We'll respond to your inquiry within 24 hours.",
-    error: 'Something went wrong. Please try again or email us directly.',
+    submit: 'Request Free Audit',
+    submitting: 'Sending...',
+    success: "Thank you! We'll be in touch within 24 hours.",
+    error: 'Something went wrong. Please email us directly.',
     validation: {
       nameRequired: 'Name is required',
+      businessRequired: 'Business name is required',
       emailRequired: 'Email is required',
-      emailInvalid: 'Invalid email format',
-      companyRequired: 'Company is required',
-      messageRequired: 'Message is required',
+      emailInvalid: 'Invalid email',
+      phoneRequired: 'Phone is required',
     },
   },
   footer: {
-    tagline: 'Premium e-commerce management for fast-growing retail brands.',
-    newsletter: 'Stay Updated',
-    emailPlaceholder: 'Enter your email',
+    tagline: 'Full-stack e-commerce partner for UAE brands serious about scaling.',
+    registered: 'Registered under RAK Economic Zone (RAKEZ), UAE.',
     sections: {
       services: 'Services',
       company: 'Company',
       legal: 'Legal',
     },
-    services: ['Inventory Sync', 'Global Logistics', 'AI Analytics'],
-    company: ['About Us', 'How It Works', 'Contact'],
+    services: [
+      'Marketplace Management',
+      'Website Development',
+      'Mobile Apps',
+      'Performance Marketing',
+      'Creative Production',
+      'Custom Software',
+    ],
+    company: ['About Us', 'Our Process', 'Pricing', 'Contact'],
     legal: ['Privacy Policy', 'Terms of Service'],
-    copyright: 'The Percentage Company. All rights reserved.',
+    copyright: 'The Percentage FZ-LLC. All rights reserved.',
   },
 };

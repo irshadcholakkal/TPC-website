@@ -2,90 +2,42 @@
 
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
-
-const icons = ['📦', '🛍️', '💎', '📊'];
-
-function ServiceCard({ title, description, index }: { title: string; description: string; index: number }) {
-  return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      className="glass-card p-7 group cursor-default"
-    >
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 text-sm font-black font-heading"
-        style={{ background: 'rgba(249,115,22,0.1)', color: '#F97316', border: '1px solid rgba(249,115,22,0.2)' }}
-      >
-        {String(index + 1).padStart(2, '0')}
-      </div>
-      <h4 className="text-[17px] font-bold mb-2.5 tracking-tight" style={{ color: 'var(--text-primary)' }}>
-        {title}
-      </h4>
-      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-        {description}
-      </p>
-    </motion.div>
-  );
-}
+import { CardSpotlight } from '@/components/ui/card-spotlight';
 
 export default function ServicesPage() {
   const { t, isRTL } = useLang();
 
   return (
-    <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
-      />
-
-      <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-20"
-        >
-          <span className="badge mb-5">{t.services.badge}</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight mb-5 text-gradient-white">
-            {t.services.title}
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            {t.services.subtitle}
-          </p>
+    <section className="relative" style={{ backgroundColor: 'var(--bg-primary)', paddingTop: '7rem', paddingBottom: '7rem' }}>
+      <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
+      <div className={`relative z-10 max-w-7xl mx-auto px-6 md:px-10 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
+          <p className="section-label mb-3">{t.services.badge}</p>
+          <div className="flex items-end gap-6 flex-wrap">
+            <h2 style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, color: '#fff' }}>
+              {t.services.title1}{' '}<span style={{ color: '#E8FF00' }}>{t.services.title2}</span>
+            </h2>
+            <p className="text-base pb-1 max-w-md" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
+              {t.services.subtitle}
+            </p>
+          </div>
         </motion.div>
 
-        <div className="space-y-16 md:space-y-20">
-          {t.services.categories.map((service, catIndex) => (
-            <motion.div
-              key={catIndex}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIndex * 0.08 }}
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-xl text-xl"
-                  style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.2)' }}
-                >
-                  {icons[catIndex]}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {t.services.items.map((item, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.07 }}>
+              <CardSpotlight color="rgba(232,255,0,0.04)" radius={280} className="h-full !p-7 !rounded-2xl"
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+                <div className="relative z-10 flex flex-col h-full">
+                  <span className="text-2xl mb-4 block">{item.icon}</span>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#fff', fontFamily: 'var(--font-heading), Georgia, serif', lineHeight: 1.3 }}>
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                  {service.category}
-                </h3>
-                <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {service.items.map((item, itemIndex) => (
-                  <ServiceCard
-                    key={itemIndex}
-                    title={item.title}
-                    description={item.description}
-                    index={itemIndex}
-                  />
-                ))}
-              </div>
+              </CardSpotlight>
             </motion.div>
           ))}
         </div>

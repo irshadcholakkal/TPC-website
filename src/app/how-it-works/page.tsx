@@ -7,109 +7,41 @@ export default function HowItWorksPage() {
   const { t, isRTL } = useLang();
 
   return (
-    <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      {/* Accent orb */}
-      <div
-        className="absolute bottom-0 left-0 w-[600px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.05]"
-        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
-      />
-
-      <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-24"
-        >
-          <span className="badge mb-5">{t.howItWorks.badge}</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight mb-5 text-gradient-white">
+    <section className="relative" style={{ backgroundColor: 'var(--bg-primary)', paddingTop: '7rem', paddingBottom: '7rem', borderTop: '1px solid var(--border)' }}>
+      <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
+      <div className={`relative z-10 max-w-7xl mx-auto px-6 md:px-10 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
+          <p className="section-label mb-3">{t.howItWorks.badge}</p>
+          <h2 style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, color: '#fff' }}>
             {t.howItWorks.title}
           </h2>
-          <p className="max-w-xl mx-auto text-lg" style={{ color: 'var(--text-secondary)' }}>
-            {t.howItWorks.subtitle}
-          </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical connector line */}
-          <div
-            className="absolute left-[27px] md:left-1/2 top-8 bottom-8 w-px hidden md:block"
-            style={{ background: 'linear-gradient(to bottom, transparent, var(--border), var(--border), transparent)' }}
-          />
-
-          <div className="space-y-10 md:space-y-0">
-            {t.howItWorks.steps.map((step, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: isEven ? -24 : 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`md:flex md:items-center md:gap-8 ${isEven ? '' : 'md:flex-row-reverse'} mb-10 md:mb-16`}
-                >
-                  {/* Card */}
-                  <div className="flex-1">
-                    <div
-                      className="glass-card p-7 md:p-8"
-                    >
-                      <div className="flex items-start gap-5">
-                        <div
-                          className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm"
-                          style={{
-                            background: 'linear-gradient(135deg, rgba(249,115,22,0.15), rgba(234,108,10,0.15))',
-                            border: '1px solid rgba(249,115,22,0.25)',
-                            color: '#FB923C',
-                          }}
-                        >
-                          {step.number}
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-3 flex-wrap">
-                            <h3 className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                              {step.title}
-                            </h3>
-                            <span
-                              className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full"
-                              style={{ background: 'rgba(249,115,22,0.1)', color: '#FB923C', border: '1px solid rgba(249,115,22,0.2)' }}
-                            >
-                              {step.duration}
-                            </span>
-                          </div>
-                          <p className="leading-relaxed" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                            {step.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Center dot */}
-                  <div className="hidden md:flex relative items-center justify-center w-6 h-6 flex-shrink-0 z-10">
-                    <div
-                      className="absolute inset-0 rounded-full animate-ping opacity-30"
-                      style={{ background: '#F97316' }}
-                    />
-                    <div
-                      className="w-4 h-4 rounded-full z-20 border-2"
-                      style={{
-                        background: 'linear-gradient(135deg, #F97316, #EA6C0A)',
-                        borderColor: 'var(--bg-secondary)',
-                        boxShadow: '0 0 12px rgba(249,115,22,0.5)',
-                      }}
-                    />
-                  </div>
-
-                  {/* Spacer */}
-                  <div className="flex-1 hidden md:block" />
-                </motion.div>
-              );
-            })}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {t.howItWorks.steps.map((step, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.09 }}>
+              <div className="rounded-2xl p-6 h-full transition-all duration-300"
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(232,255,0,0.2)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'; }}>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-2xl font-black" style={{ color: '#E8FF00', fontFamily: 'var(--font-body), system-ui' }}>
+                    {step.number}
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                    style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-muted)', border: '1px solid var(--border)', fontFamily: 'var(--font-body), system-ui' }}>
+                    {step.duration}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold mb-3" style={{ color: '#fff', fontFamily: 'var(--font-heading), Georgia, serif' }}>
+                  {step.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
+                  {step.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

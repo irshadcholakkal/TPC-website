@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
 
-function CheckIcon() {
+function Check() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -14,139 +14,75 @@ function CheckIcon() {
 export default function PricingPage() {
   const { t, isRTL } = useLang();
 
-  const accentPlans = [0, 1, 2];
-  const highlightIndex = 1; // "Recommended" card gets extra highlight
-
   return (
-    <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
-      />
+    <section className="relative" style={{ backgroundColor: 'var(--bg-secondary)', paddingTop: '7rem', paddingBottom: '7rem', borderTop: '1px solid var(--border)' }} aria-labelledby="pricing-heading">
+      <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
+      <div className={`relative z-10 max-w-7xl mx-auto px-6 md:px-10 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
+            <p className="section-label mb-3">{t.pricing.badge}</p>
+            <h2 id="pricing-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, color: '#fff' }}>
+              {t.pricing.title1}{' '}<em style={{ color: '#E8FF00', fontStyle: 'italic' }}>{t.pricing.title2}</em>
+            </h2>
+            <p className="mt-4 text-base" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
+              {t.pricing.subtitle}
+            </p>
+          </motion.div>
 
-      <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-20"
-        >
-          <span className="badge mb-5">{t.pricing.badge}</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight mb-5 leading-tight">
-            <span className="text-gradient-white">{t.pricing.title1}</span>
-            <br />
-            <span className="text-gradient">{t.pricing.title2}</span>
-          </h2>
-          <p className="max-w-xl mx-auto text-lg" style={{ color: 'var(--text-secondary)' }}>
-            {t.pricing.subtitle}
-          </p>
-        </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+            <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--bg-card)', border: '1px solid rgba(232,255,0,0.2)' }}>
+              {/* Top accent */}
+              <div className="h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #E8FF00, transparent)' }} />
 
-        {/* Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {t.pricing.plans.map((plan, index) => {
-            const isHighlighted = index === highlightIndex;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex flex-col rounded-2xl overflow-hidden ${isHighlighted ? 'ring-2' : ''}`}
-                style={{
-                  background: isHighlighted
-                    ? 'linear-gradient(160deg, rgba(249,115,22,0.12) 0%, var(--bg-card) 40%)'
-                    : 'var(--bg-card)',
-                  border: `1px solid ${isHighlighted ? 'rgba(249,115,22,0.4)' : 'var(--border)'}`,
-                  boxShadow: isHighlighted ? 'var(--shadow-card), 0 0 50px rgba(249,115,22,0.12)' : 'var(--shadow-card)',
-                }}
-              >
-                {/* Badge */}
-                {plan.highlight && (
-                  <div className="px-6 pt-6 pb-0">
-                    <span
-                      className="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-                      style={
-                        isHighlighted
-                          ? { background: 'linear-gradient(135deg, #F97316, #F97316)', color: '#fff' }
-                          : { background: 'var(--bg-secondary)', color: 'var(--text-muted)', border: '1px solid var(--border)' }
-                      }
-                    >
-                      {plan.highlight}
-                    </span>
-                  </div>
-                )}
+              <div className="p-8 md:p-10">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] mb-3" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}>
+                  {t.pricing.starting}
+                </p>
 
-                <div className="flex flex-col flex-1 p-7">
-                  {/* Plan name & price */}
-                  <div className="mb-7">
-                    <h3 className="text-lg font-bold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                      {plan.name}
-                    </h3>
-                    <div className="flex items-baseline gap-1 mb-1">
-                      <span
-                        className="text-4xl lg:text-5xl font-black font-heading tracking-tight"
-                        style={{ color: isHighlighted ? '#FB923C' : 'var(--text-primary)' }}
-                      >
-                        {plan.price}
-                      </span>
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                      {plan.period}
-                    </span>
-                    <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                      {plan.description}
-                    </p>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="divider mb-6" />
-
-                  {/* Features */}
-                  <ul className="space-y-3.5 flex-1 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span
-                          className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center"
-                          style={{ background: isHighlighted ? 'rgba(249,115,22,0.2)' : 'var(--bg-secondary)', color: '#FB923C' }}
-                        >
-                          <CheckIcon />
-                        </span>
-                        <span className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <a
-                    href="#contact"
-                    onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className={isHighlighted ? 'btn-accent text-center w-full py-3 text-sm' : 'btn-ghost text-center w-full py-3 text-sm'}
-                  >
-                    {t.pricing.cta}
-                  </a>
+                {/* Price */}
+                <div className="flex items-baseline gap-3 mb-1">
+                  <span style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 900, lineHeight: 1, color: '#E8FF00' }}>
+                    {t.pricing.fee}
+                  </span>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}>
+                  {t.pricing.feeNote}
+                </p>
 
-        {/* Note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center text-sm mt-12 max-w-2xl mx-auto leading-relaxed"
-          style={{ color: 'var(--text-muted)' }}
-        >
-          {t.pricing.note}
-        </motion.p>
+                {/* Commission line */}
+                <div className="inline-flex items-center gap-3 rounded-xl px-5 py-3 mb-8" style={{ background: 'rgba(232,255,0,0.06)', border: '1px solid rgba(232,255,0,0.2)' }}>
+                  <span className="text-lg font-black" style={{ color: '#E8FF00', fontFamily: 'var(--font-body), system-ui' }}>+</span>
+                  <span className="text-base font-semibold" style={{ color: '#fff', fontFamily: 'var(--font-body), system-ui' }}>
+                    {t.pricing.commission}
+                  </span>
+                </div>
+
+                {/* Features */}
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                  {t.pricing.features.map((f, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ background: 'rgba(232,255,0,0.12)', color: '#E8FF00' }}>
+                        <Check />
+                      </span>
+                      <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a href="#contact"
+                  onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="btn-accent inline-flex px-8 py-3.5 text-sm font-bold w-full sm:w-auto justify-center">
+                  {t.pricing.cta} →
+                </a>
+
+                <p className="mt-6 text-xs leading-relaxed" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}>
+                  {t.pricing.note}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

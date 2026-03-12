@@ -6,190 +6,163 @@ import { useLang } from '@/context/LanguageContext';
 
 export default function ContactPage() {
   const { t, isRTL } = useLang();
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
+  const [form, setForm] = useState({ fullName: '', businessName: '', email: '', phone: '', service: '', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
+    setForm(p => ({ ...p, [name]: value }));
+    if (errors[name]) setErrors(p => ({ ...p, [name]: '' }));
   };
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = t.contact.validation.nameRequired;
-    if (!formData.email.trim()) {
-      newErrors.email = t.contact.validation.emailRequired;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t.contact.validation.emailInvalid;
-    }
-    if (!formData.company.trim()) newErrors.company = t.contact.validation.companyRequired;
-    if (!formData.message.trim()) newErrors.message = t.contact.validation.messageRequired;
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.fullName.trim()) e.fullName = t.contact.validation.nameRequired;
+    if (!form.businessName.trim()) e.businessName = t.contact.validation.businessRequired;
+    if (!form.email.trim()) e.email = t.contact.validation.emailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t.contact.validation.emailInvalid;
+    if (!form.phone.trim()) e.phone = t.contact.validation.phoneRequired;
+    setErrors(e);
+    return !Object.keys(e).length;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+    if (!validate()) return;
+    setSubmitting(true);
     try {
-      const response = await fetch('https://formspree.io/f/mzddzozp', {
+      const res = await fetch('https://formspree.io/f/mzddzozp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(form),
       });
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', company: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+      if (res.ok) { setStatus('success'); setForm({ fullName: '', businessName: '', email: '', phone: '', service: '', message: '' }); }
+      else setStatus('error');
+    } catch { setStatus('error'); }
+    finally { setSubmitting(false); }
   };
 
+  const L = ({ text }: { text: string }) => (
+    <span className="block text-[10px] font-bold uppercase tracking-[0.14em] mb-2" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}>
+      {text}
+    </span>
+  );
+
   return (
-    <section className="relative section-padding overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      <div
-        className="absolute bottom-0 right-0 w-[500px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)' }}
-      />
+    <section className="relative" style={{ backgroundColor: 'var(--bg-primary)', paddingTop: '7rem', paddingBottom: '7rem', borderTop: '1px solid var(--border)' }}>
+      <div className="absolute inset-0 bg-grid-subtle pointer-events-none" />
+      <div className={`relative z-10 max-w-7xl mx-auto px-6 md:px-10 ${isRTL ? 'rtl' : 'ltr'}`}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-      <div className={`max-w-7xl mx-auto px-5 md:px-8 lg:px-12 ${isRTL ? 'rtl' : 'ltr'}`}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 md:mb-16"
-        >
-          <span className="badge mb-5">{t.contact.badge}</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight mb-4 text-gradient-white">
-            {t.contact.title}
-          </h2>
-          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
-            {t.contact.subtitle}
-          </p>
-        </motion.div>
+          {/* Left */}
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <p className="section-label mb-3">{t.contact.badge}</p>
+            <h2 className="mb-3" style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, color: '#fff' }}>
+              {t.contact.title}
+            </h2>
+            <p className="text-xl font-semibold mb-5" style={{ color: '#E8FF00', fontFamily: 'var(--font-heading), Georgia, serif', fontStyle: 'italic' }}>
+              {t.contact.subtitle}
+            </p>
+            <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
+              {t.contact.body}
+            </p>
 
-        {/* Form Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto"
-        >
-          <div className="glass-card p-8 md:p-10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {/* Name */}
-                <div className="space-y-2">
-                  <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                    {t.contact.fields.name}
-                  </label>
-                  <input
-                    type="text" id="name" name="name"
-                    value={formData.name} onChange={handleChange}
-                    className="input-field"
-                    placeholder={t.contact.fields.namePlaceholder}
-                  />
-                  {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
+            <div className="space-y-3">
+              {[
+                { icon: '📞', label: 'Phone / WhatsApp', value: t.contact.phone },
+                { icon: '✉️', label: 'Email', value: t.contact.email },
+                { icon: '📍', label: 'Location', value: t.contact.address },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 rounded-xl px-5 py-4"
+                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+                  <span className="text-lg">{item.icon}</span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider font-semibold mb-0.5" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}>{item.label}</p>
+                    <p className="text-sm font-medium" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-body), system-ui' }}>{item.value}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </motion.div>
 
-                {/* Email */}
-                <div className="space-y-2">
-                  <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                    {t.contact.fields.email}
-                  </label>
-                  <input
-                    type="email" id="email" name="email"
-                    value={formData.email} onChange={handleChange}
-                    className="input-field"
-                    placeholder={t.contact.fields.emailPlaceholder}
-                  />
-                  {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
+          {/* Right — form */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+            <div className="rounded-2xl p-7 md:p-8" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+              <form onSubmit={onSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="fullName"><L text={t.contact.fields.fullName} /></label>
+                    <input type="text" id="fullName" name="fullName" value={form.fullName} onChange={onChange}
+                      className="input-field" placeholder={t.contact.fields.fullNamePlaceholder} />
+                    {errors.fullName && <p className="text-xs mt-1" style={{ color: '#F87171' }}>{errors.fullName}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="businessName"><L text={t.contact.fields.businessName} /></label>
+                    <input type="text" id="businessName" name="businessName" value={form.businessName} onChange={onChange}
+                      className="input-field" placeholder={t.contact.fields.businessNamePlaceholder} />
+                    {errors.businessName && <p className="text-xs mt-1" style={{ color: '#F87171' }}>{errors.businessName}</p>}
+                  </div>
                 </div>
-              </div>
-
-              {/* Company */}
-              <div className="space-y-2">
-                <label htmlFor="company" className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  {t.contact.fields.company}
-                </label>
-                <input
-                  type="text" id="company" name="company"
-                  value={formData.company} onChange={handleChange}
-                  className="input-field"
-                  placeholder={t.contact.fields.companyPlaceholder}
-                />
-                {errors.company && <p className="text-xs text-red-500">{errors.company}</p>}
-              </div>
-
-              {/* Message */}
-              <div className="space-y-2">
-                <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  {t.contact.fields.message}
-                </label>
-                <textarea
-                  id="message" name="message"
-                  value={formData.message} onChange={handleChange}
-                  rows={5}
-                  className="input-field resize-none"
-                  placeholder={t.contact.fields.messagePlaceholder}
-                />
-                {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn-accent w-full py-3.5 text-base disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    {t.contact.submitting}
-                  </span>
-                ) : t.contact.submit}
-              </button>
-
-              {/* Status messages */}
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl text-sm text-center font-medium"
-                  style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.25)', color: '#FB923C' }}
-                >
-                  {t.contact.success}
-                </motion.div>
-              )}
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl text-sm text-center font-medium"
-                  style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: '#F87171' }}
-                >
-                  {t.contact.error}
-                </motion.div>
-              )}
-            </form>
-          </div>
-        </motion.div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="email"><L text={t.contact.fields.email} /></label>
+                    <input type="email" id="email" name="email" value={form.email} onChange={onChange}
+                      className="input-field" placeholder={t.contact.fields.emailPlaceholder} />
+                    {errors.email && <p className="text-xs mt-1" style={{ color: '#F87171' }}>{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="phone"><L text={t.contact.fields.phone} /></label>
+                    <input type="tel" id="phone" name="phone" value={form.phone} onChange={onChange}
+                      className="input-field" placeholder={t.contact.fields.phonePlaceholder} />
+                    {errors.phone && <p className="text-xs mt-1" style={{ color: '#F87171' }}>{errors.phone}</p>}
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="service"><L text={t.contact.fields.service} /></label>
+                  <select id="service" name="service" value={form.service} onChange={onChange} className="input-field">
+                    <option value="">Select a service...</option>
+                    {t.contact.fields.serviceOptions.map((opt, i) => (
+                      <option key={i} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="message"><L text={t.contact.fields.message} /></label>
+                  <textarea id="message" name="message" value={form.message} onChange={onChange}
+                    rows={4} className="input-field resize-none" placeholder={t.contact.fields.messagePlaceholder} />
+                </div>
+                <button type="submit" disabled={submitting}
+                  className="btn-accent w-full py-4 text-sm font-bold disabled:opacity-50">
+                  {submitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                      </svg>
+                      {t.contact.submitting}
+                    </span>
+                  ) : t.contact.submit}
+                </button>
+                {status === 'success' && (
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                    className="text-sm text-center py-3 rounded-lg"
+                    style={{ background: 'rgba(232,255,0,0.07)', color: '#E8FF00', border: '1px solid rgba(232,255,0,0.2)', fontFamily: 'var(--font-body), system-ui' }}>
+                    {t.contact.success}
+                  </motion.p>
+                )}
+                {status === 'error' && (
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                    className="text-sm text-center py-3 rounded-lg"
+                    style={{ background: 'rgba(239,68,68,0.07)', color: '#F87171', border: '1px solid rgba(239,68,68,0.2)', fontFamily: 'var(--font-body), system-ui' }}>
+                    {t.contact.error}
+                  </motion.p>
+                )}
+              </form>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

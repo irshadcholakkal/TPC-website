@@ -3,52 +3,45 @@
 import { motion } from 'framer-motion';
 import { useLang } from '@/context/LanguageContext';
 
-const platforms = [
-  'Amazon', 'Shopify', 'Medusa', 'Noon', 'Keeta',
-  'Talabat', 'Smile', 'WhatsApp', 'Custom Store',
-];
+const platforms = ['Amazon', 'Shopify', 'Medusa', 'Noon', 'Keeta', 'Talabat', 'Smile', 'WhatsApp', 'Custom Store'];
 
 export default function TrustSection() {
   const { t } = useLang();
-  // duplicate for seamless loop
   const items = [...platforms, ...platforms];
 
   return (
-    <section className="relative py-16 overflow-hidden" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', backgroundColor: 'var(--bg-secondary)' }}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8 mb-10 text-center">
+    <section
+      className="relative py-14 overflow-hidden"
+      style={{ borderTop: '1px solid rgba(255,255,255,0.07)', borderBottom: '1px solid rgba(255,255,255,0.07)', backgroundColor: 'var(--bg-secondary)' }}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-10 mb-8">
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-sm font-semibold uppercase tracking-widest"
-          style={{ color: 'var(--text-muted)' }}
+          className="text-xs font-bold uppercase tracking-[0.22em]"
+          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body), system-ui' }}
         >
           {t.trust.heading}
         </motion.p>
       </div>
 
-      {/* Infinite scroll ticker */}
       <div className="relative overflow-hidden">
-        {/* Left fade */}
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to right, var(--bg-secondary), transparent)' }} />
-        {/* Right fade */}
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to left, var(--bg-secondary), transparent)' }} />
 
-        <div className="flex gap-8 w-max animate-ticker">
+        <div className="flex gap-3 w-max animate-ticker">
           {items.map((name, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 px-6 py-3 rounded-full border select-none whitespace-nowrap"
-              style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg border select-none whitespace-nowrap"
+              style={{ background: 'var(--bg-card)', borderColor: 'rgba(255,255,255,0.07)' }}
             >
-              <span
-                className="w-2 h-2 rounded-full flex-shrink-0"
-                style={{ background: 'linear-gradient(135deg, #F97316, #F97316)' }}
-              />
-              <span className="text-sm font-semibold" style={{ color: 'var(--text-secondary)' }}>
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#E8FF00' }} />
+              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body), system-ui' }}>
                 {name}
               </span>
             </div>
