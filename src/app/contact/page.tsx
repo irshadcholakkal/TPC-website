@@ -368,7 +368,7 @@ export default function ContactPage() {
 
             <div className="space-y-3">
               {[
-                { icon: '☎', label: copy.infoPhoneLabel, value: '+971 50 633 1903' },
+                { icon: '☎', label: copy.infoPhoneLabel, value: '+971 56 331 9030 , +971 56 929 8537' },
                 { icon: '✉', label: copy.infoEmailLabel, value: 'thepercentage@outlook.com' },
                 { icon: '⌖', label: copy.infoLocationLabel, value: copy.infoLocationValue },
               ].map((item) => (

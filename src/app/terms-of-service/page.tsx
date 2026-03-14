@@ -29,7 +29,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. Performance Disclaimer', points: ['We do not guarantee specific sales, rank, traffic, or profit outcomes.', 'Results depend on market conditions, competition, and third-party platforms.'] },
       { title: '6. Intellectual Property and Confidentiality', points: ['Each party retains ownership of pre-existing intellectual property.', 'Confidential information must be protected and not shared without consent.'] },
       { title: '7. Limitation of Liability and Governing Law', points: ['Liability is limited to the extent permitted by applicable law and contract.', 'These terms are governed by applicable UAE legal framework.'] },
-      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   ar: {
@@ -47,7 +47,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. إخلاء مسؤولية الأداء', points: ['لا نضمن نتائج محددة في المبيعات أو الترتيب أو الزيارات أو الأرباح.', 'تعتمد النتائج على ظروف السوق والمنافسة والمنصات الخارجية.'] },
       { title: '6. الملكية الفكرية والسرية', points: ['يحتفظ كل طرف بملكية حقوقه الفكرية السابقة.', 'يجب حماية المعلومات السرية وعدم مشاركتها دون موافقة.'] },
       { title: '7. حدود المسؤولية والقانون الحاكم', points: ['تكون المسؤولية محدودة بالقدر الذي يسمح به القانون والعقد المطبق.', 'تخضع هذه الشروط للإطار القانوني المعمول به في دولة الإمارات.'] },
-      { title: '8. التواصل', points: ['البريد الإلكتروني: thepercentage@outlook.com', 'الهاتف: +971 50 633 1903'] },
+      { title: '8. التواصل', points: ['البريد الإلكتروني: thepercentage@outlook.com', 'الهاتف: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   fr: {
@@ -65,7 +65,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. Clause Performance', points: ['Aucun resultat commercial specifique ne peut etre garanti.', 'Les resultats dependent du marche, de la concurrence et des plateformes.'] },
       { title: '6. Propriete Intellectuelle et Confidentialite', points: ['Chaque partie conserve sa propriete intellectuelle preexistante.', 'Les informations confidentielles doivent rester protegees.'] },
       { title: '7. Responsabilite et Droit Applicable', points: ['La responsabilite est limitee selon le cadre contractuel et legal.', 'Ces conditions sont regies par le cadre juridique applicable aux UAE.'] },
-      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   nl: {
@@ -83,7 +83,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. Performance Disclaimer', points: ['Specifieke verkoop- of winstresultaten worden niet gegarandeerd.', 'Resultaten hangen af van markt, concurrentie en platformfactoren.'] },
       { title: '6. Intellectueel Eigendom en Vertrouwelijkheid', points: ['Bestaand intellectueel eigendom blijft eigendom van de oorspronkelijke partij.', 'Vertrouwelijke informatie moet beschermd blijven.'] },
       { title: '7. Aansprakelijkheid en Toepasselijk Recht', points: ['Aansprakelijkheid is beperkt binnen de wettelijke en contractuele grenzen.', 'Deze voorwaarden vallen onder het toepasselijke UAE juridisch kader.'] },
-      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   tl: {
@@ -101,7 +101,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. Performance Disclaimer', points: ['Walang garantiyang specific sales o profit outcome.', 'Depende ang resulta sa market, competition, at third-party platforms.'] },
       { title: '6. IP at Confidentiality', points: ['Bawat panig ay may pagmamay-ari sa sariling pre-existing IP.', 'Dapat protektado ang confidential information.'] },
       { title: '7. Liability at Governing Law', points: ['Limitado ang liability ayon sa batas at kontrata.', 'Saklaw ito ng applicable UAE legal framework.'] },
-      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '8. Contact', points: ['Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   hi: {
@@ -119,7 +119,7 @@ const TERMS_COPY: Record<Language, {
       { title: '5. प्रदर्शन अस्वीकरण', points: ['हम विशिष्ट बिक्री, रैंक, ट्रैफिक या लाभ की गारंटी नहीं देते।', 'परिणाम बाजार की स्थिति, प्रतिस्पर्धा और थर्ड-पार्टी प्लेटफॉर्म पर निर्भर करते हैं।'] },
       { title: '6. बौद्धिक संपदा और गोपनीयता', points: ['हर पक्ष अपनी पूर्व-विद्यमान बौद्धिक संपदा का स्वामित्व बनाए रखता है।', 'गोपनीय जानकारी को सुरक्षित रखना और बिना सहमति साझा न करना आवश्यक है।'] },
       { title: '7. देयता सीमा और लागू कानून', points: ['देयता लागू कानून और अनुबंध की सीमा तक सीमित रहेगी।', 'ये शर्तें UAE के लागू कानूनी ढांचे द्वारा संचालित होंगी।'] },
-      { title: '8. संपर्क', points: ['ईमेल: thepercentage@outlook.com', 'फ़ोन: +971 50 633 1903'] },
+      { title: '8. संपर्क', points: ['ईमेल: thepercentage@outlook.com', 'फ़ोन: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
 };

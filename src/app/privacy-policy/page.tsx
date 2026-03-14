@@ -27,7 +27,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. Sharing and Disclosure', points: ['We may share data with trusted service providers that support delivery.', 'We may disclose data when required by law or legal process.', 'We do not sell personal information to third parties.'] },
       { title: '4. Security and Retention', points: ['We apply reasonable technical and organizational safeguards.', 'Data is retained only as needed for services, legal obligations, and legitimate business use.', 'No system can guarantee absolute security.'] },
       { title: '5. Your Rights', points: ['You may request access, correction, or deletion of your personal data where applicable.', 'You may contact us for privacy-related requests or concerns.'] },
-      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   ar: {
@@ -43,7 +43,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. مشاركة البيانات والإفصاح', points: ['قد نشارك البيانات مع مزودي خدمات موثوقين يدعمون تقديم الخدمة.', 'قد نفصح عن البيانات إذا تطلب القانون أو الإجراءات القانونية ذلك.', 'لا نبيع المعلومات الشخصية لأي طرف ثالث.'] },
       { title: '4. الأمان والاحتفاظ بالبيانات', points: ['نطبق إجراءات حماية تقنية وتنظيمية معقولة.', 'نحتفظ بالبيانات فقط للمدة اللازمة للخدمة والالتزامات القانونية والاستخدام المشروع.', 'لا يوجد نظام يمكنه ضمان أمان مطلق.'] },
       { title: '5. حقوقك', points: ['يمكنك طلب الوصول إلى بياناتك الشخصية أو تصحيحها أو حذفها حيثما ينطبق ذلك.', 'يمكنك التواصل معنا لأي طلبات أو استفسارات متعلقة بالخصوصية.'] },
-      { title: '6. التواصل', points: ['The Percentage FZ-LLC', 'البريد الإلكتروني: thepercentage@outlook.com', 'الهاتف: +971 50 633 1903'] },
+      { title: '6. التواصل', points: ['The Percentage FZ-LLC', 'البريد الإلكتروني: thepercentage@outlook.com', 'الهاتف: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   fr: {
@@ -59,7 +59,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. Partage et Divulgation', points: ['Partage possible avec des prestataires de confiance necessaires a la livraison.', 'Divulgation possible en cas d obligation legale.', 'Aucune vente de donnees personnelles a des tiers.'] },
       { title: '4. Securite et Conservation', points: ['Mesures techniques et organisationnelles raisonnables.', 'Conservation limitee aux besoins contractuels et legaux.', 'Aucun systeme ne garantit une securite absolue.'] },
       { title: '5. Vos Droits', points: ['Vous pouvez demander acces, correction ou suppression selon le cadre applicable.', 'Vous pouvez nous contacter pour toute question de confidentialite.'] },
-      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   nl: {
@@ -75,7 +75,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. Delen van Gegevens', points: ['Gegevens kunnen gedeeld worden met vertrouwde leveranciers voor servicelevering.', 'Openbaarmaking kan plaatsvinden als de wet dat vereist.', 'Wij verkopen geen persoonsgegevens aan derden.'] },
       { title: '4. Beveiliging en Bewaartermijn', points: ['We gebruiken redelijke technische en organisatorische beveiliging.', 'Gegevens worden bewaard zolang nodig voor dienstverlening en wettelijke plichten.', 'Absolute beveiliging kan niet worden gegarandeerd.'] },
       { title: '5. Jouw Rechten', points: ['Je kunt verzoeken om inzage, correctie of verwijdering waar van toepassing.', 'Je kunt contact opnemen voor privacyvragen of verzoeken.'] },
-      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   tl: {
@@ -91,7 +91,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. Pagbabahagi ng Data', points: ['Maaaring ibahagi sa trusted providers na kailangan sa service delivery.', 'Maaaring mag-disclose kapag required ng batas.', 'Hindi kami nagbebenta ng personal data sa third parties.'] },
       { title: '4. Security at Retention', points: ['May reasonable technical at organizational safeguards kami.', 'Data ay iniingatan lamang ayon sa operational at legal need.', 'Walang system na may absolute security guarantee.'] },
       { title: '5. Iyong Mga Karapatan', points: ['Maaari kang humiling ng access, correction, o deletion kung applicable.', 'Maaari kang makipag-ugnayan para sa anumang privacy concern.'] },
-      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 50 633 1903'] },
+      { title: '6. Contact', points: ['The Percentage FZ-LLC', 'Email: thepercentage@outlook.com', 'Phone: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
   hi: {
@@ -107,7 +107,7 @@ const PRIVACY_COPY: Record<Language, {
       { title: '3. डेटा साझा करना और खुलासा', points: ['सेवा डिलीवरी में सहायता करने वाले विश्वसनीय सेवा प्रदाताओं के साथ डेटा साझा किया जा सकता है।', 'कानून या कानूनी प्रक्रिया की आवश्यकता पर खुलासा किया जा सकता है।', 'हम व्यक्तिगत डेटा तीसरे पक्ष को नहीं बेचते हैं।'] },
       { title: '4. सुरक्षा और डेटा संरक्षण अवधि', points: ['हम उचित तकनीकी और संगठनात्मक सुरक्षा उपाय लागू करते हैं।', 'डेटा केवल उतनी अवधि तक रखा जाता है जितनी सेवा, कानूनी दायित्व और वैध व्यावसायिक उपयोग के लिए जरूरी हो।', 'कोई भी प्रणाली पूर्ण सुरक्षा की गारंटी नहीं दे सकती।'] },
       { title: '5. आपके अधिकार', points: ['जहां लागू हो, आप अपने व्यक्तिगत डेटा तक पहुंच, संशोधन या हटाने का अनुरोध कर सकते हैं।', 'गोपनीयता संबंधी किसी भी अनुरोध या चिंता के लिए आप हमसे संपर्क कर सकते हैं।'] },
-      { title: '6. संपर्क', points: ['The Percentage FZ-LLC', 'ईमेल: thepercentage@outlook.com', 'फ़ोन: +971 50 633 1903'] },
+      { title: '6. संपर्क', points: ['The Percentage FZ-LLC', 'ईमेल: thepercentage@outlook.com', 'फ़ोन: +971 56 331 9030 , +971 56 929 8537'] },
     ],
   },
 };
