@@ -3,6 +3,7 @@
 import Hero from '@/components/sections/Hero';
 import StatsBar from '@/components/sections/StatsBar';
 import TrustSection from '@/components/sections/TrustSection';
+import OurClientsSection from '@/components/sections/OurClientsSection';
 import AboutPage from './about/page';
 import ServicesPage from './services/page';
 import HowItWorksPage from './how-it-works/page';
@@ -23,6 +24,9 @@ export default function Home() {
 
       {/* 3. Platform ticker */}
       <TrustSection />
+
+      {/* Our Clients */}
+      <OurClientsSection />
 
       {/* 4. About */}
       <AboutPage />
